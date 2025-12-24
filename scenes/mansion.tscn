@@ -1,0 +1,442 @@
+[gd_scene load_steps=20 format=3 uid="uid://b5nc2t1go1vdb"]
+
+[ext_resource type="PackedScene" uid="uid://dvulpwfcl6b3j" path="res://player.tscn" id="1_b0ldg"]
+[ext_resource type="Script" uid="uid://cm82u4bgd173g" path="res://ambience_manager.gd" id="3_e71x4"]
+[ext_resource type="AudioStream" uid="uid://p1kyeuk758ms" path="res://audio/horror-playhouse-404813.mp3" id="3_r5cxe"]
+[ext_resource type="Script" uid="uid://kpcygc37nkk8" path="res://candle_flicker.gd" id="4_r5cxe"]
+[ext_resource type="Script" uid="uid://64p5iafwicb0" path="res://hide_zone.gd" id="5_8ciwx"]
+[ext_resource type="Script" uid="uid://bq21u480stvcj" path="res://crawling_zombie.gd" id="5_be2l0"]
+[ext_resource type="Script" uid="uid://cnrcew8nn2pvd" path="res://interactive_door.gd" id="6_ay0ti"]
+[ext_resource type="PackedScene" uid="uid://bcmmdhhhyibi0" path="res://characters/Zombie Crawl.fbx" id="6_be2l0"]
+[ext_resource type="PackedScene" uid="uid://cy6ydtlp1snsp" path="res://battery.tscn" id="7_8ls81"]
+
+[sub_resource type="Environment" id="Environment_3mwam"]
+background_mode = 1
+ambient_light_color = Color(0.05, 0.05, 0.08, 1)
+ambient_light_energy = 0.3
+tonemap_mode = 2
+glow_enabled = true
+glow_intensity = 0.5
+fog_enabled = true
+fog_light_color = Color(0.1, 0.1, 0.12, 1)
+fog_density = 0.02
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_85jle"]
+vertices = PackedVector3Array(-14.7, 4.5, -9.7, -14.7, 4.5, 9.8, 14.8, 4.5, 9.8, 14.8, 4.5, -9.7, -4.2, 0.3, 0.05000019, -0.6999998, 0.3, 0.05000019, -0.4499998, 0.3, -0.6999998, -4.2, 0.3, -2.4499998, 0.5500002, 0.3, -0.6999998, 0.8000002, 0.3, 0.05000019, 4.3, 0.3, 0.05000019, 4.3, 0.3, -2.4499998, 4.8, 0.3, -2.6999998, 4.8, 0.3, -9.2, 2.5500002, 0.3, -9.2, -4.95, 0.3, -9.2, -4.95, 0.3, -2.6999998, -2.6999998, 0.3, -9.2, 2.3000002, 0.3, -9.7, -2.4499998, 0.3, -9.7, -14.2, 0.3, -0.19999981, -13.45, 0.3, -0.19999981, -13.2, 0.3, -1.4499998, -12.95, 0.3, -4.2, -14.2, 0.3, -4.2, -10.7, 0.3, -1.4499998, -5.7, 0.3, -2.4499998, -14.2, 0.3, -9.2, -12.7, 0.3, -5.45, -10.45, 0.3, -0.19999981, -5.7, 0.3, -0.19999981, -14.2, 0.3, -5.7, 5.8, 0.3, -2.1999998, 7.3, 0.3, -2.1999998, 7.3, 0.3, -2.6999998, 5.55, 0.3, -2.6999998, 8.05, 0.5, -2.9499998, 9.3, 0.3, -2.6999998, 9.55, 0.3, -9.2, 9.3, 0.3, -2.4499998, 14.3, 0.3, -2.4499998, 14.3, 0.3, -9.2, 7.8, 0.3, -1.4499998, 5.8, 0.3, 3.0500002, 8.8, 0.3, 3.0500002, 9.05, 0.3, 2.0500002, 11.05, 0.3, 2.0500002, 14.3, 0.3, 3.0500002, 8.8, 0.3, -1.4499998, 11.3, 0.3, 3.0500002, -12.45, 2.9, -0.4499998, -12.45, 2.9, 0.3000002, -11.7, 2.9, 0.3000002, -11.7, 2.9, -0.4499998, -13.2, 0.3, 1.3000002, -14.2, 0.3, 4.3, -10.7, 0.3, 1.3000002, -12.95, 0.3, 4.55, -13.2, 0.3, 5.8, -14.2, 0.3, 5.8, -14.2, 0.3, 9.3, -5.7, 0.3, 9.3, 0.5500002, 0.3, 0.8000002, 4.3, 0.3, 9.3, -0.4499998, 0.3, 0.8000002, -4.2, 0.3, 9.3, 11.05, 0.3, 4.05, 14.3, 0.3, 9.3, 9.05, 0.3, 4.05, 5.8, 0.3, 9.3)
+polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1), PackedInt32Array(5, 4, 6), PackedInt32Array(6, 4, 7), PackedInt32Array(9, 8, 10), PackedInt32Array(10, 8, 11), PackedInt32Array(14, 13, 12), PackedInt32Array(16, 15, 7), PackedInt32Array(7, 15, 17), PackedInt32Array(12, 11, 8), PackedInt32Array(19, 18, 14), PackedInt32Array(8, 6, 7), PackedInt32Array(19, 14, 17), PackedInt32Array(17, 14, 7), PackedInt32Array(7, 14, 8), PackedInt32Array(8, 14, 12), PackedInt32Array(21, 20, 22), PackedInt32Array(22, 20, 24), PackedInt32Array(22, 24, 23), PackedInt32Array(26, 25, 16), PackedInt32Array(16, 25, 28), PackedInt32Array(16, 28, 15), PackedInt32Array(15, 28, 27), PackedInt32Array(29, 25, 30), PackedInt32Array(30, 25, 26), PackedInt32Array(23, 28, 22), PackedInt32Array(22, 28, 25), PackedInt32Array(28, 31, 27), PackedInt32Array(33, 32, 34), PackedInt32Array(34, 32, 35), PackedInt32Array(38, 37, 36), PackedInt32Array(36, 34, 35), PackedInt32Array(35, 12, 36), PackedInt32Array(36, 12, 13), PackedInt32Array(36, 13, 38), PackedInt32Array(39, 37, 40), PackedInt32Array(40, 37, 38), PackedInt32Array(40, 38, 41), PackedInt32Array(33, 42, 32), PackedInt32Array(32, 42, 45), PackedInt32Array(32, 45, 44), PackedInt32Array(32, 44, 43), PackedInt32Array(48, 39, 46), PackedInt32Array(46, 39, 40), PackedInt32Array(46, 40, 47), PackedInt32Array(47, 49, 46), PackedInt32Array(42, 48, 45), PackedInt32Array(45, 48, 46), PackedInt32Array(53, 52, 50), PackedInt32Array(50, 52, 51), PackedInt32Array(21, 54, 20), PackedInt32Array(20, 54, 55), PackedInt32Array(56, 29, 30), PackedInt32Array(55, 54, 57), PackedInt32Array(57, 54, 56), PackedInt32Array(60, 59, 58), PackedInt32Array(58, 56, 60), PackedInt32Array(60, 56, 61), PackedInt32Array(61, 56, 30), PackedInt32Array(56, 58, 57), PackedInt32Array(9, 10, 62), PackedInt32Array(62, 10, 63), PackedInt32Array(5, 64, 4), PackedInt32Array(4, 64, 65), PackedInt32Array(62, 63, 64), PackedInt32Array(64, 63, 65), PackedInt32Array(49, 47, 66), PackedInt32Array(66, 47, 67), PackedInt32Array(44, 68, 43), PackedInt32Array(43, 68, 69), PackedInt32Array(66, 67, 68), PackedInt32Array(68, 67, 69)]
+geometry_parsed_geometry_type = 0
+cell_height = 0.2
+agent_height = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_be2l0"]
+albedo_color = Color(0.15, 0.1, 0.1, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8ciwx"]
+size = Vector3(1.3, 2.3, 1.3)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8ciwx"]
+albedo_color = Color(0.25, 0.15, 0.1, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ay0ti"]
+size = Vector3(3, 2.5, 3)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8fmpm"]
+size = Vector3(0.8, 0.8, 0.8)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0ps0c"]
+albedo_color = Color(0.3, 0.25, 0.15, 1)
+metallic = 0.2
+roughness = 0.8
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_8fmpm"]
+top_radius = 0.15
+bottom_radius = 0.15
+height = 0.4
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_r5cxe"]
+radius = 0.4
+height = 1.5
+
+[node name="Mansion" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_3mwam")
+
+[node name="MoonLight" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.8660254, 0.35355338, -0.35355338, 0, 0.70710677, 0.70710677, 0.5, -0.6123724, 0.6123724, 0, 0, 0)
+light_color = Color(0.6, 0.7, 0.9, 1)
+light_energy = 0.15
+shadow_enabled = true
+
+[node name="Player" parent="." instance=ExtResource("1_b0ldg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -7)
+
+[node name="Ambience" type="Node3D" parent="."]
+script = ExtResource("3_e71x4")
+
+[node name="BackgroundDrone" type="AudioStreamPlayer" parent="Ambience"]
+stream = ExtResource("3_r5cxe")
+autoplay = true
+
+[node name="WindSound" type="AudioStreamPlayer" parent="Ambience"]
+
+[node name="RandomCreaks" type="Node3D" parent="Ambience"]
+
+[node name="Creak1" type="AudioStreamPlayer3D" parent="Ambience/RandomCreaks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 2, 5)
+
+[node name="Creak2" type="AudioStreamPlayer3D" parent="Ambience/RandomCreaks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 3, 0)
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+navigation_mesh = SubResource("NavigationMesh_85jle")
+
+[node name="MansionStructure" type="Node3D" parent="NavigationRegion3D"]
+
+[node name="MainFloor" type="CSGBox3D" parent="NavigationRegion3D/MansionStructure"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
+use_collision = true
+size = Vector3(30, 0.5, 20)
+
+[node name="Walls" type="Node3D" parent="NavigationRegion3D/MansionStructure"]
+
+[node name="WallFrontLeft" type="CSGBox3D" parent="NavigationRegion3D/MansionStructure/Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 2, -10)
+use_collision = true
+size = Vector3(12, 4, 0.4)
+
+[node name="WallFrontRight" type="CSGBox3D" parent="NavigationRegion3D/MansionStructure/Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 2, -10)
+use_collision = true
+size = Vector3(12, 4, 0.4)
+
+[node name="WallBack" type="CSGBox3D" parent="NavigationRegion3D/MansionStructure/Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 10)
+use_collision = true
+size = Vector3(30, 4, 0.4)
+
+[node name="WallLeft" type="CSGBox3D" parent="NavigationRegion3D/MansionStructure/Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 2, 0)
+use_collision = true
+size = Vector3(0.4, 4, 20)
+
+[node name="WallRight" type="CSGBox3D" parent="NavigationRegion3D/MansionStructure/Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 2, 0)
+use_collision = true
+size = Vector3(0.4, 4, 20)
+
+[node name="InteriorWalls" type="Node3D" parent="NavigationRegion3D/MansionStructure"]
+
+[node name="HallwayWallLeft" type="CSGBox3D" parent="NavigationRegion3D/MansionStructure/InteriorWalls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 2, 4)
+use_collision = true
+size = Vector3(0.3, 4, 12)
+
+[node name="HallwayWallRight" type="CSGBox3D" parent="NavigationRegion3D/MansionStructure/InteriorWalls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 2, 4)
+use_collision = true
+size = Vector3(0.3, 4, 12)
+
+[node name="Ceiling" type="CSGCombiner3D" parent="NavigationRegion3D/MansionStructure"]
+use_collision = true
+
+[node name="MainCeiling" type="CSGBox3D" parent="NavigationRegion3D/MansionStructure/Ceiling"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0)
+size = Vector3(30, 0.3, 20)
+
+[node name="CeilingHole1" type="CSGBox3D" parent="NavigationRegion3D/MansionStructure/Ceiling"]
+operation = 2
+
+[node name="Props" type="Node3D" parent="NavigationRegion3D"]
+
+[node name="GrandfatherClock" type="Node3D" parent="NavigationRegion3D/Props"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, 5)
+
+[node name="ClockBody" type="CSGBox3D" parent="NavigationRegion3D/Props/GrandfatherClock"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, 0)
+use_collision = true
+size = Vector3(0.6, 2.2, 0.4)
+
+[node name="ClockFace" type="CSGCylinder3D" parent="NavigationRegion3D/Props/GrandfatherClock"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 1.8, -0.18)
+use_collision = true
+radius = 0.2
+height = 0.05
+
+[node name="CandleTable" type="Node3D" parent="NavigationRegion3D/Props"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 3)
+script = ExtResource("4_r5cxe")
+
+[node name="TableTop" type="CSGBox3D" parent="NavigationRegion3D/Props/CandleTable"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+use_collision = true
+size = Vector3(1.2, 0.08, 0.8)
+
+[node name="Leg1" type="CSGBox3D" parent="NavigationRegion3D/Props/CandleTable"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.375, 0.3)
+use_collision = true
+size = Vector3(0.08, 0.75, 0.08)
+
+[node name="Leg2" type="CSGBox3D" parent="NavigationRegion3D/Props/CandleTable"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0.375, 0.3)
+use_collision = true
+size = Vector3(0.08, 0.75, 0.08)
+
+[node name="Leg3" type="CSGBox3D" parent="NavigationRegion3D/Props/CandleTable"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.375, -0.3)
+use_collision = true
+size = Vector3(0.08, 0.75, 0.08)
+
+[node name="Leg4" type="CSGBox3D" parent="NavigationRegion3D/Props/CandleTable"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0.375, -0.3)
+use_collision = true
+size = Vector3(0.08, 0.75, 0.08)
+
+[node name="Candle1" type="CSGCylinder3D" parent="NavigationRegion3D/Props/CandleTable"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 0.87, 0)
+use_collision = true
+radius = 0.03
+height = 0.15
+
+[node name="CandleLight1" type="OmniLight3D" parent="NavigationRegion3D/Props/CandleTable"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 0.95, 0)
+light_color = Color(1, 0.7, 0.3, 1)
+light_energy = 0.3
+omni_range = 3.0
+
+[node name="Candle2" type="CSGCylinder3D" parent="NavigationRegion3D/Props/CandleTable"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.87, 0)
+use_collision = true
+radius = 0.03
+height = 0.15
+
+[node name="CandleLight2" type="OmniLight3D" parent="NavigationRegion3D/Props/CandleTable"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.95, 0)
+light_color = Color(1, 0.7, 0.3, 1)
+light_energy = 0.3
+omni_range = 3.0
+
+[node name="Candle3" type="CSGCylinder3D" parent="NavigationRegion3D/Props/CandleTable"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0.87, 0)
+use_collision = true
+radius = 0.03
+height = 0.15
+
+[node name="CandleLight3" type="OmniLight3D" parent="NavigationRegion3D/Props/CandleTable"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0.95, 0)
+light_color = Color(1, 0.7, 0.3, 1)
+light_energy = 0.3
+omni_range = 3.0
+
+[node name="KnockedChair" type="Node3D" parent="NavigationRegion3D/Props"]
+transform = Transform3D(0.90630776, 0.42101008, 0.036833636, 0, 0.087155804, -0.9961947, -0.42261827, 0.90285903, 0.07898998, 8, 0, -3)
+
+[node name="Seat" type="CSGBox3D" parent="NavigationRegion3D/Props/KnockedChair"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0)
+use_collision = true
+size = Vector3(0.5, 0.06, 0.5)
+
+[node name="Back" type="CSGBox3D" parent="NavigationRegion3D/Props/KnockedChair"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, -0.22)
+use_collision = true
+size = Vector3(0.5, 0.5, 0.06)
+
+[node name="ChairLeg1" type="CSGBox3D" parent="NavigationRegion3D/Props/KnockedChair"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 0.225, 0.2)
+use_collision = true
+size = Vector3(0.05, 0.45, 0.05)
+
+[node name="ChairLeg2" type="CSGBox3D" parent="NavigationRegion3D/Props/KnockedChair"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, 0.225, 0.2)
+use_collision = true
+size = Vector3(0.05, 0.45, 0.05)
+
+[node name="ChairLeg3" type="CSGBox3D" parent="NavigationRegion3D/Props/KnockedChair"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 0.225, -0.2)
+use_collision = true
+size = Vector3(0.05, 0.45, 0.05)
+
+[node name="ChairLeg4" type="CSGBox3D" parent="NavigationRegion3D/Props/KnockedChair"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, 0.225, -0.2)
+use_collision = true
+size = Vector3(0.05, 0.45, 0.05)
+
+[node name="Bookshelf" type="Node3D" parent="NavigationRegion3D/Props"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, -5)
+
+[node name="Frame" type="CSGBox3D" parent="NavigationRegion3D/Props/Bookshelf"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+use_collision = true
+size = Vector3(1.5, 2, 0.4)
+
+[node name="ShelfHole1" type="CSGBox3D" parent="NavigationRegion3D/Props/Bookshelf/Frame"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, -0.05)
+operation = 2
+size = Vector3(1.4, 0.35, 0.35)
+
+[node name="ShelfHole2" type="CSGBox3D" parent="NavigationRegion3D/Props/Bookshelf/Frame"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, -0.05)
+operation = 2
+size = Vector3(1.4, 0.35, 0.35)
+
+[node name="ShelfHole3" type="CSGBox3D" parent="NavigationRegion3D/Props/Bookshelf/Frame"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, -0.05)
+operation = 2
+size = Vector3(1.4, 0.35, 0.35)
+
+[node name="ShelfHole4" type="CSGBox3D" parent="NavigationRegion3D/Props/Bookshelf/Frame"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.65, -0.05)
+operation = 2
+size = Vector3(1.4, 0.35, 0.35)
+
+[node name="FallenBook1" type="CSGBox3D" parent="NavigationRegion3D/Props"]
+transform = Transform3D(0.87279356, -0.48808953, 2.133507e-08, 0, -4.371139e-08, -1, 0.48808953, 0.87279356, -3.815102e-08, -13.5, 0.015, -4.5)
+use_collision = true
+size = Vector3(0.15, 0.22, 0.03)
+
+[node name="FallenBook2" type="CSGBox3D" parent="NavigationRegion3D/Props"]
+transform = Transform3D(0.99980474, -0.019760802, 8.637721e-10, 0, -4.371139e-08, -1, 0.019760802, 0.99980474, -4.3702855e-08, -13.2, 0.015, -4.5)
+use_collision = true
+size = Vector3(0.15, 0.22, 0.03)
+
+[node name="FallenBook3" type="CSGBox3D" parent="NavigationRegion3D/Props"]
+transform = Transform3D(0.961751, -0.2739253, 1.1973655e-08, 0, -4.371139e-08, -1, 0.2739253, 0.961751, -4.203947e-08, -12.9, 0.015, -4.5)
+use_collision = true
+size = Vector3(0.15, 0.22, 0.03)
+
+[node name="CreepyMirror" type="Node3D" parent="NavigationRegion3D/Props"]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 14.7, 1.5, 0)
+
+[node name="Frame" type="CSGBox3D" parent="NavigationRegion3D/Props/CreepyMirror"]
+use_collision = true
+size = Vector3(1, 1.5, 0.1)
+
+[node name="Surface" type="CSGBox3D" parent="NavigationRegion3D/Props/CreepyMirror"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.04)
+use_collision = true
+size = Vector3(0.85, 1.35, 0.02)
+
+[node name="Picture1" type="Node3D" parent="NavigationRegion3D/Props"]
+transform = Transform3D(0.99939084, -0.034899496, 0, 0.034899496, 0.99939084, 0, 0, 0, 1, -10, 2, 9.7)
+
+[node name="Frame" type="CSGBox3D" parent="NavigationRegion3D/Props/Picture1"]
+use_collision = true
+size = Vector3(0.6, 0.8, 0.05)
+
+[node name="Canvas" type="CSGBox3D" parent="NavigationRegion3D/Props/Picture1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.02)
+size = Vector3(0.5, 0.7, 0.02)
+
+[node name="Picture2" type="Node3D" parent="NavigationRegion3D/Props"]
+transform = Transform3D(0.9986295, 0.05233596, 0, -0.05233596, 0.9986295, 0, 0, 0, 1, -5, 2.2, 9.7)
+
+[node name="Frame" type="CSGBox3D" parent="NavigationRegion3D/Props/Picture2"]
+use_collision = true
+size = Vector3(0.6, 0.8, 0.05)
+
+[node name="Canvas" type="CSGBox3D" parent="NavigationRegion3D/Props/Picture2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.02)
+size = Vector3(0.5, 0.7, 0.02)
+
+[node name="Picture3" type="Node3D" parent="NavigationRegion3D/Props"]
+transform = Transform3D(0.9961947, -0.08715574, 0, 0.08715574, 0.9961947, 0, 0, 0, 1, 5, 1.8, 9.7)
+
+[node name="Frame" type="CSGBox3D" parent="NavigationRegion3D/Props/Picture3"]
+use_collision = true
+size = Vector3(0.6, 0.8, 0.05)
+
+[node name="Canvas" type="CSGBox3D" parent="NavigationRegion3D/Props/Picture3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.02)
+size = Vector3(0.5, 0.7, 0.02)
+
+[node name="Picture4" type="Node3D" parent="NavigationRegion3D/Props"]
+transform = Transform3D(-4.368476e-08, -1.5255054e-09, 1, -0.034899496, 0.99939084, 0, -0.99939084, -0.034899496, -4.371139e-08, -14.7, 2, -2)
+
+[node name="Frame" type="CSGBox3D" parent="NavigationRegion3D/Props/Picture4"]
+use_collision = true
+size = Vector3(0.6, 0.8, 0.05)
+
+[node name="Canvas" type="CSGBox3D" parent="NavigationRegion3D/Props/Picture4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.02)
+size = Vector3(0.5, 0.7, 0.02)
+
+[node name="Closet" type="Node3D" parent="NavigationRegion3D/Props"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, 0)
+
+[node name="BackWall" type="CSGBox3D" parent="NavigationRegion3D/Props/Closet"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, -0.75)
+use_collision = true
+size = Vector3(1.5, 2.5, 0.1)
+material = SubResource("StandardMaterial3D_be2l0")
+
+[node name="LeftWall" type="CSGBox3D" parent="NavigationRegion3D/Props/Closet"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.75, 1.25, 0)
+use_collision = true
+size = Vector3(0.1, 2.5, 1.5)
+material = SubResource("StandardMaterial3D_be2l0")
+
+[node name="RightWall" type="CSGBox3D" parent="NavigationRegion3D/Props/Closet"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.75, 1.25, 0)
+use_collision = true
+size = Vector3(0.1, 2.5, 1.5)
+material = SubResource("StandardMaterial3D_be2l0")
+
+[node name="Ceiling" type="CSGBox3D" parent="NavigationRegion3D/Props/Closet"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
+use_collision = true
+size = Vector3(1.5, 0.1, 1.5)
+material = SubResource("StandardMaterial3D_be2l0")
+
+[node name="HideZone" type="Area3D" parent="NavigationRegion3D/Props/Closet"]
+script = ExtResource("5_8ciwx")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Props/Closet/HideZone"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.15, 0)
+shape = SubResource("BoxShape3D_8ciwx")
+
+[node name="Door" type="Node3D" parent="NavigationRegion3D/Props/Closet"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.75, 0, 0.75)
+script = ExtResource("6_ay0ti")
+
+[node name="DoorMesh" type="CSGBox3D" parent="NavigationRegion3D/Props/Closet/Door"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7, 1.15, 0)
+use_collision = true
+size = Vector3(1.4, 2.3, 0.08)
+material = SubResource("StandardMaterial3D_8ciwx")
+
+[node name="InteractionArea" type="Area3D" parent="NavigationRegion3D/Props/Closet/Door"]
+collision_layer = 0
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Props/Closet/Door/InteractionArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7, 1.15, 1)
+shape = SubResource("BoxShape3D_ay0ti")
+
+[node name="Battery" parent="NavigationRegion3D/Props" instance=ExtResource("7_8ls81")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15, 0)
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="NavigationRegion3D/Props/Battery"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15, 0)
+shape = SubResource("BoxShape3D_8fmpm")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="NavigationRegion3D/Props/Battery"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0.15, 0)
+material_override = SubResource("StandardMaterial3D_0ps0c")
+mesh = SubResource("CylinderMesh_8fmpm")
+
+[node name="CrawlingZombie" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8)
+script = ExtResource("5_be2l0")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CrawlingZombie"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0.4, 0)
+shape = SubResource("CapsuleShape3D_r5cxe")
+disabled = true
+
+[node name="ZombieModel" parent="CrawlingZombie" instance=ExtResource("6_be2l0")]
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="CrawlingZombie"]
+path_desired_distance = 0.5
+target_desired_distance = 0.5
+max_speed = 2.0

@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://cy6ydtlp1snsp"]
+
+[ext_resource type="Script" uid="uid://dkdf63mwjeh4" path="res://battery.gd" id="1_0ps0c"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8fmpm"]
+size = Vector3(0.8, 0.8, 0.8)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0ps0c"]
+albedo_color = Color(0.3, 0.25, 0.15, 1)
+metallic = 0.2
+roughness = 0.8
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_8fmpm"]
+top_radius = 0.15
+bottom_radius = 0.15
+height = 0.4
+
+[node name="Battery" type="Area3D"]
+script = ExtResource("1_0ps0c")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15, 0)
+shape = SubResource("BoxShape3D_8fmpm")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0.15, 0)
+material_override = SubResource("StandardMaterial3D_0ps0c")
+mesh = SubResource("CylinderMesh_8fmpm")

@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://c4qbj4t4cfjct"]
+
+[sub_resource type="Environment" id="Environment_7dm0k"]
+background_mode = 1
+background_color = Color(0.02, 0.02, 0.03, 1)
+ambient_light_color = Color(0.05, 0.05, 0.08, 1)
+ambient_light_energy = 0.1
+fog_enabled = true
+fog_light_color = Color(0.1, 0.1, 0.12, 1)
+fog_density = 0.02
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.03
+
+[node name="Main" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_7dm0k")
+
+[node name="Floor" type="CSGBox3D" parent="."]
