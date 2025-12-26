@@ -13,6 +13,7 @@ var cooldown_timer: float = 0.0
 # Interior hallway walls: Left at X=-4, Right at X=6, both spanning Z=-2 to Z=10
 # Safe zones: X < -5 (left of left wall), X between -3 and 5 (hallway), X > 7 (right of right wall)
 static var spawn_positions: Array[Vector3] = [
+	# === FIRST FLOOR ===
 	# Center hallway area (between the walls, safe)
 	Vector3(0, 0.15, 0),      # Dead center of hallway
 	Vector3(2, 0.15, 0),      # Hallway right
@@ -21,16 +22,44 @@ static var spawn_positions: Array[Vector3] = [
 	Vector3(0, 0.15, -5),     # Hallway front
 	Vector3(2, 0.15, -5),     # Hallway front right
 	Vector3(-2, 0.15, -5),    # Hallway front left
-	
+
 	# Left room (X < -5, away from left wall)
 	Vector3(-8, 0.15, 0),     # Left room center
 	Vector3(-10, 0.15, -5),   # Left room front
 	Vector3(-8, 0.15, 5),     # Left room back
-	
+
 	# Right room (X > 7, away from right wall)
 	Vector3(10, 0.15, 0),     # Right room center
 	Vector3(10, 0.15, -5),    # Right room front
 	Vector3(10, 0.15, 5),     # Right room back
+
+	# === SECOND FLOOR (Y = 4.65) ===
+	# Dining room (right side, X > 0) - avoid under the table
+	Vector3(5, 4.65, 3),      # Dining room back
+	Vector3(10, 4.65, -3),    # Dining room front
+	Vector3(10, 4.65, 3),     # Dining room corner
+
+	# Kitchen (left side, X < 0, Z > 0)
+	Vector3(-7, 4.65, 5),     # Kitchen center
+	Vector3(-10, 4.65, 7),    # Kitchen near fridge
+	Vector3(-5, 4.65, 8),     # Kitchen near sink
+
+	# Bathroom (front left, X < -5, Z < -4)
+	Vector3(-10, 4.65, -7),   # Bathroom center
+	Vector3(-8, 4.65, -6),    # Bathroom near sink
+
+	# Staircase landing
+	Vector3(12, 4.65, 8),     # Top of stairs
+
+	# === BASEMENT (Y = -3.85) ===
+	Vector3(0, -3.85, 0),     # Basement center
+	Vector3(5, -3.85, 3),     # Basement right back
+	Vector3(-5, -3.85, 3),    # Basement left back
+	Vector3(8, -3.85, -3),    # Basement right front
+	Vector3(-8, -3.85, -3),   # Basement left front
+	Vector3(0, -3.85, -6),    # Basement front center
+	Vector3(10, -3.85, 0),    # Basement far right
+	Vector3(-10, -3.85, 0),   # Basement far left
 ]
 
 @onready var mesh: MeshInstance3D = $MeshInstance3D
@@ -110,9 +139,9 @@ func _process(delta: float) -> void:
 			print("Battery ready to pick up at: ", global_position)
 	
 	# Safety check - if battery is out of bounds, teleport it back
-	if global_position.y < -1 or global_position.y > 10:
+	if global_position.y < -5 or global_position.y > 10:
 		print("Battery out of Y bounds! Resetting...")
 		global_position = Vector3(0, 0.15, 0)
-	if abs(global_position.x) > 14 or abs(global_position.z) > 9:
+	if abs(global_position.x) > 15 or abs(global_position.z) > 12:
 		print("Battery out of XZ bounds! Resetting...")
 		global_position = Vector3(0, 0.15, 0)

@@ -27,7 +27,7 @@ var is_exhausted = false
 var flashlight_on = true
 var battery_life: float = 100.0  # 0-100
 var max_battery: float = 100.0
-var battery_drain_rate: float = 100.0 / 120.0  # Drains over 2 minutes (120 seconds)
+var battery_drain_rate: float = 100.0 / 300.0  # Drains over 5 minutes (300 seconds)
 var base_flashlight_energy: float = 2.0
 var flicker_timer: float = 0.0
 var flicker_intensity: float = 0.0
@@ -38,6 +38,11 @@ var death_timer: float = 0.0
 var shake_intensity: float = 0.0
 var zombie_ref: Node3D = null
 var jumpscare_sound: AudioStreamPlayer = null
+var caught_by_monster: String = "george"  # "george" or "mother"
+
+# Key inventory
+var collected_keys: Array[int] = []
+const KEYS_NEEDED: int = 10
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -47,25 +52,50 @@ func _ready() -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if is_dead:
 		return
-	
+
 	# Mouse look
 	if event is InputEventMouseMotion:
 		rotate_y(-event.relative.x * MOUSE_SENSITIVITY)
 		head.rotate_x(-event.relative.y * MOUSE_SENSITIVITY)
 		head.rotation.x = clamp(head.rotation.x, deg_to_rad(-89), deg_to_rad(89))
-	
+
 	# Toggle flashlight (only if battery available)
 	if event.is_action_pressed("flashlight"):
 		if battery_life > 0:
 			flashlight_on = !flashlight_on
 			flashlight.visible = flashlight_on
-	
+
+	# Interact with E key - raycast to find what we're looking at
+	if event is InputEventKey and event.pressed and event.keycode == KEY_E:
+		try_interact()
+
 	# Exit mouse capture
 	if event.is_action_pressed("ui_cancel"):
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-	
+
 	if event is InputEventMouseButton and Input.get_mouse_mode() == Input.MOUSE_MODE_VISIBLE:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+
+func try_interact() -> void:
+	# Raycast from camera to see what we're looking at
+	var space_state = get_world_3d().direct_space_state
+	var cam = camera
+
+	var ray_origin = cam.global_position
+	var ray_end = ray_origin + -cam.global_transform.basis.z * 3.0  # 3 meter range
+
+	var query = PhysicsRayQueryParameters3D.create(ray_origin, ray_end)
+	query.collision_mask = 2  # Layer 2 = interactables (keys)
+	query.collide_with_areas = true
+	query.collide_with_bodies = false
+
+	var result = space_state.intersect_ray(query)
+
+	if result:
+		var hit = result.collider
+		# Check if it's a key
+		if hit.is_in_group("key") and hit.has_method("collect"):
+			hit.collect(self)
 
 func _physics_process(delta: float) -> void:
 	if is_dead:
@@ -155,14 +185,29 @@ func add_battery(amount: float) -> void:
 		flashlight.visible = true
 		flashlight_on = true
 
+func add_key(key_id: int) -> void:
+	if key_id not in collected_keys:
+		collected_keys.append(key_id)
+		print("Key collected! ", collected_keys.size(), "/", KEYS_NEEDED)
+
+func get_key_count() -> int:
+	return collected_keys.size()
+
+func has_all_keys() -> bool:
+	return collected_keys.size() >= KEYS_NEEDED
+
 func on_caught() -> void:
+	on_caught_by("george")
+
+func on_caught_by(monster: String) -> void:
 	if is_dead:
 		return
-	
+
+	caught_by_monster = monster
 	is_dead = true
 	death_timer = 0.0
 	shake_intensity = 1.0
-	
+
 	# Find zombie
 	zombie_ref = get_tree().get_first_node_in_group("zombie")
 	if zombie_ref == null:
@@ -284,22 +329,28 @@ func create_jumpscare_ui() -> void:
 	bg.size = viewport_size
 	canvas.add_child(bg)
 	
-	# Jumpscare image using Sprite2D
+	# Jumpscare image using Sprite2D - different image for each monster
 	var face_sprite = Sprite2D.new()
 	face_sprite.name = "JumpscareFace"
-	var tex = load("res://jumpscare.jpeg")
+	var tex_path = "res://jumpscare.jpeg"  # George's jumpscare
+	if caught_by_monster == "mother":
+		tex_path = "res://bertha.jpeg"  # Mother's jumpscare
+	elif caught_by_monster == "frank":
+		tex_path = "res://frank jumpscare.jpeg"  # Frank's jumpscare
+	var tex = load(tex_path)
 	if tex:
 		face_sprite.texture = tex
-		print("Texture loaded! Size: ", tex.get_size())
-		# Center on screen and scale to fill (slightly smaller)
+		print("Texture loaded! Size: ", tex.get_size(), " Monster: ", caught_by_monster)
+		# Center on screen and scale to fit
 		face_sprite.position = viewport_size / 2
 		var tex_size = tex.get_size()
 		var scale_x = viewport_size.x / tex_size.x
 		var scale_y = viewport_size.y / tex_size.y
-		var scale_factor = max(scale_x, scale_y) * 0.85  # Slightly pulled back
+		# Use min instead of max to fit the whole image
+		var scale_factor = min(scale_x, scale_y) * 0.95
 		face_sprite.scale = Vector2(scale_factor, scale_factor)
 	else:
-		print("ERROR: Could not load jumpscare.jpeg")
+		print("ERROR: Could not load ", tex_path)
 	canvas.add_child(face_sprite)
 	
 	# Red overlay
