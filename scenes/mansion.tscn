@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://b5nc2t1go1vdb"]
+[gd_scene load_steps=33 format=3 uid="uid://b5nc2t1go1vdb"]
 
 [ext_resource type="PackedScene" uid="uid://dvulpwfcl6b3j" path="res://player.tscn" id="1_b0ldg"]
 [ext_resource type="Script" uid="uid://cm82u4bgd173g" path="res://ambience_manager.gd" id="3_e71x4"]
@@ -9,6 +9,12 @@
 [ext_resource type="Script" uid="uid://cnrcew8nn2pvd" path="res://interactive_door.gd" id="6_ay0ti"]
 [ext_resource type="PackedScene" uid="uid://bcmmdhhhyibi0" path="res://characters/Zombie Crawl.fbx" id="6_be2l0"]
 [ext_resource type="PackedScene" uid="uid://cy6ydtlp1snsp" path="res://battery.tscn" id="7_8ls81"]
+[ext_resource type="Script" uid="uid://5ymgo8oqyoes" path="res://ceiling_crawler.gd" id="10_mother"]
+[ext_resource type="PackedScene" uid="uid://t5tain1rq7t7" path="res://characters/Mother Running Crawl.fbx" id="11_mother_model"]
+[ext_resource type="Script" uid="uid://hstke123p4op" path="res://escape_door.gd" id="12_escape"]
+[ext_resource type="Script" uid="uid://f5kgr4llnj0k" path="res://key_pickup.gd" id="13_key"]
+[ext_resource type="Script" uid="uid://dbdup0cittb7s" path="res://basement_crawler.gd" id="14_frank"]
+[ext_resource type="PackedScene" uid="uid://befh2m2xmku5p" path="res://characters/Frank Crawling.fbx" id="15_frank_model"]
 
 [sub_resource type="Environment" id="Environment_3mwam"]
 background_mode = 1
@@ -25,8 +31,24 @@ fog_density = 0.02
 vertices = PackedVector3Array(-14.7, 4.5, -9.7, -14.7, 4.5, 9.8, 14.8, 4.5, 9.8, 14.8, 4.5, -9.7, -4.2, 0.3, 0.05000019, -0.6999998, 0.3, 0.05000019, -0.4499998, 0.3, -0.6999998, -4.2, 0.3, -2.4499998, 0.5500002, 0.3, -0.6999998, 0.8000002, 0.3, 0.05000019, 4.3, 0.3, 0.05000019, 4.3, 0.3, -2.4499998, 4.8, 0.3, -2.6999998, 4.8, 0.3, -9.2, 2.5500002, 0.3, -9.2, -4.95, 0.3, -9.2, -4.95, 0.3, -2.6999998, -2.6999998, 0.3, -9.2, 2.3000002, 0.3, -9.7, -2.4499998, 0.3, -9.7, -14.2, 0.3, -0.19999981, -13.45, 0.3, -0.19999981, -13.2, 0.3, -1.4499998, -12.95, 0.3, -4.2, -14.2, 0.3, -4.2, -10.7, 0.3, -1.4499998, -5.7, 0.3, -2.4499998, -14.2, 0.3, -9.2, -12.7, 0.3, -5.45, -10.45, 0.3, -0.19999981, -5.7, 0.3, -0.19999981, -14.2, 0.3, -5.7, 5.8, 0.3, -2.1999998, 7.3, 0.3, -2.1999998, 7.3, 0.3, -2.6999998, 5.55, 0.3, -2.6999998, 8.05, 0.5, -2.9499998, 9.3, 0.3, -2.6999998, 9.55, 0.3, -9.2, 9.3, 0.3, -2.4499998, 14.3, 0.3, -2.4499998, 14.3, 0.3, -9.2, 7.8, 0.3, -1.4499998, 5.8, 0.3, 3.0500002, 8.8, 0.3, 3.0500002, 9.05, 0.3, 2.0500002, 11.05, 0.3, 2.0500002, 14.3, 0.3, 3.0500002, 8.8, 0.3, -1.4499998, 11.3, 0.3, 3.0500002, -12.45, 2.9, -0.4499998, -12.45, 2.9, 0.3000002, -11.7, 2.9, 0.3000002, -11.7, 2.9, -0.4499998, -13.2, 0.3, 1.3000002, -14.2, 0.3, 4.3, -10.7, 0.3, 1.3000002, -12.95, 0.3, 4.55, -13.2, 0.3, 5.8, -14.2, 0.3, 5.8, -14.2, 0.3, 9.3, -5.7, 0.3, 9.3, 0.5500002, 0.3, 0.8000002, 4.3, 0.3, 9.3, -0.4499998, 0.3, 0.8000002, -4.2, 0.3, 9.3, 11.05, 0.3, 4.05, 14.3, 0.3, 9.3, 9.05, 0.3, 4.05, 5.8, 0.3, 9.3)
 polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1), PackedInt32Array(5, 4, 6), PackedInt32Array(6, 4, 7), PackedInt32Array(9, 8, 10), PackedInt32Array(10, 8, 11), PackedInt32Array(14, 13, 12), PackedInt32Array(16, 15, 7), PackedInt32Array(7, 15, 17), PackedInt32Array(12, 11, 8), PackedInt32Array(19, 18, 14), PackedInt32Array(8, 6, 7), PackedInt32Array(19, 14, 17), PackedInt32Array(17, 14, 7), PackedInt32Array(7, 14, 8), PackedInt32Array(8, 14, 12), PackedInt32Array(21, 20, 22), PackedInt32Array(22, 20, 24), PackedInt32Array(22, 24, 23), PackedInt32Array(26, 25, 16), PackedInt32Array(16, 25, 28), PackedInt32Array(16, 28, 15), PackedInt32Array(15, 28, 27), PackedInt32Array(29, 25, 30), PackedInt32Array(30, 25, 26), PackedInt32Array(23, 28, 22), PackedInt32Array(22, 28, 25), PackedInt32Array(28, 31, 27), PackedInt32Array(33, 32, 34), PackedInt32Array(34, 32, 35), PackedInt32Array(38, 37, 36), PackedInt32Array(36, 34, 35), PackedInt32Array(35, 12, 36), PackedInt32Array(36, 12, 13), PackedInt32Array(36, 13, 38), PackedInt32Array(39, 37, 40), PackedInt32Array(40, 37, 38), PackedInt32Array(40, 38, 41), PackedInt32Array(33, 42, 32), PackedInt32Array(32, 42, 45), PackedInt32Array(32, 45, 44), PackedInt32Array(32, 44, 43), PackedInt32Array(48, 39, 46), PackedInt32Array(46, 39, 40), PackedInt32Array(46, 40, 47), PackedInt32Array(47, 49, 46), PackedInt32Array(42, 48, 45), PackedInt32Array(45, 48, 46), PackedInt32Array(53, 52, 50), PackedInt32Array(50, 52, 51), PackedInt32Array(21, 54, 20), PackedInt32Array(20, 54, 55), PackedInt32Array(56, 29, 30), PackedInt32Array(55, 54, 57), PackedInt32Array(57, 54, 56), PackedInt32Array(60, 59, 58), PackedInt32Array(58, 56, 60), PackedInt32Array(60, 56, 61), PackedInt32Array(61, 56, 30), PackedInt32Array(56, 58, 57), PackedInt32Array(9, 10, 62), PackedInt32Array(62, 10, 63), PackedInt32Array(5, 64, 4), PackedInt32Array(4, 64, 65), PackedInt32Array(62, 63, 64), PackedInt32Array(64, 63, 65), PackedInt32Array(49, 47, 66), PackedInt32Array(66, 47, 67), PackedInt32Array(44, 68, 43), PackedInt32Array(43, 68, 69), PackedInt32Array(66, 67, 68), PackedInt32Array(68, 67, 69)]
 geometry_parsed_geometry_type = 0
+cell_size = 0.15
 cell_height = 0.2
 agent_height = 1.0
+agent_radius = 0.3
+agent_max_climb = 0.35
+agent_max_slope = 50.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_floor"]
+albedo_color = Color(0.55, 0.52, 0.5, 1)
+roughness = 0.9
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wall"]
+albedo_color = Color(0.6, 0.58, 0.55, 1)
+roughness = 0.85
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ceiling"]
+albedo_color = Color(0.5, 0.48, 0.46, 1)
+roughness = 0.8
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_be2l0"]
 albedo_color = Color(0.15, 0.1, 0.1, 1)
@@ -56,6 +78,20 @@ height = 0.4
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_r5cxe"]
 radius = 0.4
 height = 1.5
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_escape_door"]
+size = Vector3(3, 3, 3)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_escape_door"]
+albedo_color = Color(0.4, 0.25, 0.1, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_key"]
+size = Vector3(0.4, 0.4, 0.4)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_key"]
+albedo_color = Color(0.8, 0.65, 0.1, 1)
+metallic = 0.7
+roughness = 0.4
 
 [node name="Mansion" type="Node3D"]
 
@@ -94,37 +130,87 @@ navigation_mesh = SubResource("NavigationMesh_85jle")
 
 [node name="MansionStructure" type="Node3D" parent="NavigationRegion3D"]
 
-[node name="MainFloor" type="CSGBox3D" parent="NavigationRegion3D/MansionStructure"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
+[node name="MainFloor" type="Node3D" parent="NavigationRegion3D/MansionStructure"]
+
+[node name="FloorFront" type="CSGBox3D" parent="NavigationRegion3D/MansionStructure/MainFloor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, -6.25)
 use_collision = true
-size = Vector3(30, 0.5, 20)
+size = Vector3(30, 0.5, 8.5)
+material = SubResource("StandardMaterial3D_floor")
+
+[node name="FloorBack" type="CSGBox3D" parent="NavigationRegion3D/MansionStructure/MainFloor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 8)
+use_collision = true
+size = Vector3(30, 0.5, 4)
+material = SubResource("StandardMaterial3D_floor")
+
+[node name="FloorLeftSide" type="CSGBox3D" parent="NavigationRegion3D/MansionStructure/MainFloor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.5, -0.25, 3)
+use_collision = true
+size = Vector3(13, 0.5, 10)
+material = SubResource("StandardMaterial3D_floor")
+
+[node name="FloorRightSide" type="CSGBox3D" parent="NavigationRegion3D/MansionStructure/MainFloor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.5, -0.25, 3)
+use_collision = true
+size = Vector3(13, 0.5, 10)
+material = SubResource("StandardMaterial3D_floor")
 
 [node name="Walls" type="Node3D" parent="NavigationRegion3D/MansionStructure"]
 
 [node name="WallFrontLeft" type="CSGBox3D" parent="NavigationRegion3D/MansionStructure/Walls"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 2, -10)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.5, 2, -10)
 use_collision = true
-size = Vector3(12, 4, 0.4)
+size = Vector3(13, 4, 0.4)
+material = SubResource("StandardMaterial3D_wall")
 
 [node name="WallFrontRight" type="CSGBox3D" parent="NavigationRegion3D/MansionStructure/Walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 2, -10)
 use_collision = true
-size = Vector3(12, 4, 0.4)
+size = Vector3(17, 4, 0.4)
+material = SubResource("StandardMaterial3D_wall")
+
+[node name="WallAboveDoor" type="CSGBox3D" parent="NavigationRegion3D/MansionStructure/Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.5, -10)
+use_collision = true
+size = Vector3(4, 1, 0.4)
+material = SubResource("StandardMaterial3D_wall")
+
+[node name="WallDoorSideLeft" type="CSGBox3D" parent="NavigationRegion3D/MansionStructure/Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.9, 1.5, -9.9)
+use_collision = true
+size = Vector3(1.6, 3, 0.6)
+material = SubResource("StandardMaterial3D_wall")
+
+[node name="WallDoorSideRight" type="CSGBox3D" parent="NavigationRegion3D/MansionStructure/Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9, 1.5, -9.9)
+use_collision = true
+size = Vector3(1.6, 3, 0.6)
+material = SubResource("StandardMaterial3D_wall")
 
 [node name="WallBack" type="CSGBox3D" parent="NavigationRegion3D/MansionStructure/Walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 10)
 use_collision = true
 size = Vector3(30, 4, 0.4)
+material = SubResource("StandardMaterial3D_wall")
 
 [node name="WallLeft" type="CSGBox3D" parent="NavigationRegion3D/MansionStructure/Walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 2, 0)
 use_collision = true
 size = Vector3(0.4, 4, 20)
+material = SubResource("StandardMaterial3D_wall")
 
 [node name="WallRight" type="CSGBox3D" parent="NavigationRegion3D/MansionStructure/Walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 2, 0)
 use_collision = true
 size = Vector3(0.4, 4, 20)
+material = SubResource("StandardMaterial3D_wall")
+
+[node name="CornerFill" type="CSGBox3D" parent="NavigationRegion3D/MansionStructure/Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5, 1, -10)
+use_collision = true
+size = Vector3(12, 6, 3)
+material = SubResource("StandardMaterial3D_wall")
 
 [node name="InteriorWalls" type="Node3D" parent="NavigationRegion3D/MansionStructure"]
 
@@ -144,9 +230,12 @@ use_collision = true
 [node name="MainCeiling" type="CSGBox3D" parent="NavigationRegion3D/MansionStructure/Ceiling"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0)
 size = Vector3(30, 0.3, 20)
+material = SubResource("StandardMaterial3D_ceiling")
 
 [node name="CeilingHole1" type="CSGBox3D" parent="NavigationRegion3D/MansionStructure/Ceiling"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 4, 5)
 operation = 2
+size = Vector3(3, 1, 12)
 
 [node name="Props" type="Node3D" parent="NavigationRegion3D"]
 
@@ -425,6 +514,756 @@ transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0
 material_override = SubResource("StandardMaterial3D_0ps0c")
 mesh = SubResource("CylinderMesh_8fmpm")
 
+[node name="Upstairs" type="Node3D" parent="NavigationRegion3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.5, 0)
+
+[node name="UpstairsFloor" type="CSGCombiner3D" parent="NavigationRegion3D/Upstairs"]
+use_collision = true
+
+[node name="Floor" type="CSGBox3D" parent="NavigationRegion3D/Upstairs/UpstairsFloor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
+size = Vector3(30, 0.5, 20)
+material = SubResource("StandardMaterial3D_floor")
+
+[node name="StaircaseHole" type="CSGBox3D" parent="NavigationRegion3D/Upstairs/UpstairsFloor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, -0.25, 5)
+operation = 2
+size = Vector3(3, 1, 12)
+
+[node name="UpstairsCeiling" type="CSGBox3D" parent="NavigationRegion3D/Upstairs"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.5, 0)
+use_collision = true
+size = Vector3(30, 0.3, 20)
+material = SubResource("StandardMaterial3D_ceiling")
+
+[node name="UpstairsWalls" type="Node3D" parent="NavigationRegion3D/Upstairs"]
+
+[node name="WallFront" type="CSGBox3D" parent="NavigationRegion3D/Upstairs/UpstairsWalls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, -10)
+use_collision = true
+size = Vector3(30, 3.5, 0.4)
+material = SubResource("StandardMaterial3D_wall")
+
+[node name="WallBack" type="CSGBox3D" parent="NavigationRegion3D/Upstairs/UpstairsWalls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, 10)
+use_collision = true
+size = Vector3(30, 3.5, 0.4)
+material = SubResource("StandardMaterial3D_wall")
+
+[node name="WallLeft" type="CSGBox3D" parent="NavigationRegion3D/Upstairs/UpstairsWalls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 1.75, 0)
+use_collision = true
+size = Vector3(0.4, 3.5, 20)
+material = SubResource("StandardMaterial3D_wall")
+
+[node name="WallRight" type="CSGBox3D" parent="NavigationRegion3D/Upstairs/UpstairsWalls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 1.75, 0)
+use_collision = true
+size = Vector3(0.4, 3.5, 20)
+material = SubResource("StandardMaterial3D_wall")
+
+[node name="InteriorWalls" type="Node3D" parent="NavigationRegion3D/Upstairs"]
+
+[node name="KitchenDiningWall" type="CSGBox3D" parent="NavigationRegion3D/Upstairs/InteriorWalls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, 0)
+use_collision = true
+size = Vector3(0.3, 3.5, 12)
+
+[node name="BathroomWallFront" type="CSGBox3D" parent="NavigationRegion3D/Upstairs/InteriorWalls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 1.75, -4)
+use_collision = true
+size = Vector3(10, 3.5, 0.3)
+
+[node name="BathroomWallSide" type="CSGBox3D" parent="NavigationRegion3D/Upstairs/InteriorWalls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 1.75, -7)
+use_collision = true
+size = Vector3(0.3, 3.5, 6)
+
+[node name="DiningRoom" type="Node3D" parent="NavigationRegion3D/Upstairs"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 0)
+
+[node name="DiningTable" type="CSGBox3D" parent="NavigationRegion3D/Upstairs/DiningRoom"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+use_collision = true
+size = Vector3(3, 0.1, 1.5)
+
+[node name="TableLeg1" type="CSGBox3D" parent="NavigationRegion3D/Upstairs/DiningRoom"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.3, 0.35, 0.6)
+use_collision = true
+size = Vector3(0.1, 0.7, 0.1)
+
+[node name="TableLeg2" type="CSGBox3D" parent="NavigationRegion3D/Upstairs/DiningRoom"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.3, 0.35, 0.6)
+use_collision = true
+size = Vector3(0.1, 0.7, 0.1)
+
+[node name="TableLeg3" type="CSGBox3D" parent="NavigationRegion3D/Upstairs/DiningRoom"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.3, 0.35, -0.6)
+use_collision = true
+size = Vector3(0.1, 0.7, 0.1)
+
+[node name="TableLeg4" type="CSGBox3D" parent="NavigationRegion3D/Upstairs/DiningRoom"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.3, 0.35, -0.6)
+use_collision = true
+size = Vector3(0.1, 0.7, 0.1)
+
+[node name="Chair1" type="Node3D" parent="NavigationRegion3D/Upstairs/DiningRoom"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.2)
+
+[node name="Seat" type="CSGBox3D" parent="NavigationRegion3D/Upstairs/DiningRoom/Chair1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0)
+use_collision = true
+size = Vector3(0.45, 0.06, 0.45)
+
+[node name="Back" type="CSGBox3D" parent="NavigationRegion3D/Upstairs/DiningRoom/Chair1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0.2)
+use_collision = true
+size = Vector3(0.45, 0.6, 0.06)
+
+[node name="Leg1" type="CSGBox3D" parent="NavigationRegion3D/Upstairs/DiningRoom/Chair1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.18, 0.21, 0.18)
+use_collision = true
+size = Vector3(0.04, 0.42, 0.04)
+
+[node name="Leg2" type="CSGBox3D" parent="NavigationRegion3D/Upstairs/DiningRoom/Chair1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.18, 0.21, 0.18)
+use_collision = true
+size = Vector3(0.04, 0.42, 0.04)
+
+[node name="Leg3" type="CSGBox3D" parent="NavigationRegion3D/Upstairs/DiningRoom/Chair1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.18, 0.21, -0.18)
+use_collision = true
+size = Vector3(0.04, 0.42, 0.04)
+
+[node name="Leg4" type="CSGBox3D" parent="NavigationRegion3D/Upstairs/DiningRoom/Chair1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.18, 0.21, -0.18)
+use_collision = true
+size = Vector3(0.04, 0.42, 0.04)
+
+[node name="Chair2" type="Node3D" parent="NavigationRegion3D/Upstairs/DiningRoom"]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0, -1.2)
+
+[node name="Seat" type="CSGBox3D" parent="NavigationRegion3D/Upstairs/DiningRoom/Chair2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0)
+use_collision = true
+size = Vector3(0.45, 0.06, 0.45)
+
+[node name="Back" type="CSGBox3D" parent="NavigationRegion3D/Upstairs/DiningRoom/Chair2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0.2)
+use_collision = true
+size = Vector3(0.45, 0.6, 0.06)
+
+[node name="Leg1" type="CSGBox3D" parent="NavigationRegion3D/Upstairs/DiningRoom/Chair2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.18, 0.21, 0.18)
+use_collision = true
+size = Vector3(0.04, 0.42, 0.04)
+
+[node name="Leg2" type="CSGBox3D" parent="NavigationRegion3D/Upstairs/DiningRoom/Chair2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.18, 0.21, 0.18)
+use_collision = true
+size = Vector3(0.04, 0.42, 0.04)
+
+[node name="Leg3" type="CSGBox3D" parent="NavigationRegion3D/Upstairs/DiningRoom/Chair2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.18, 0.21, -0.18)
+use_collision = true
+size = Vector3(0.04, 0.42, 0.04)
+
+[node name="Leg4" type="CSGBox3D" parent="NavigationRegion3D/Upstairs/DiningRoom/Chair2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.18, 0.21, -0.18)
+use_collision = true
+size = Vector3(0.04, 0.42, 0.04)
+
+[node name="Chair3" type="Node3D" parent="NavigationRegion3D/Upstairs/DiningRoom"]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 2, 0, 0)
+
+[node name="Seat" type="CSGBox3D" parent="NavigationRegion3D/Upstairs/DiningRoom/Chair3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0)
+use_collision = true
+size = Vector3(0.45, 0.06, 0.45)
+
+[node name="Back" type="CSGBox3D" parent="NavigationRegion3D/Upstairs/DiningRoom/Chair3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0.2)
+use_collision = true
+size = Vector3(0.45, 0.6, 0.06)
+
+[node name="Leg1" type="CSGBox3D" parent="NavigationRegion3D/Upstairs/DiningRoom/Chair3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.18, 0.21, 0.18)
+use_collision = true
+size = Vector3(0.04, 0.42, 0.04)
+
+[node name="Leg2" type="CSGBox3D" parent="NavigationRegion3D/Upstairs/DiningRoom/Chair3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.18, 0.21, 0.18)
+use_collision = true
+size = Vector3(0.04, 0.42, 0.04)
+
+[node name="Leg3" type="CSGBox3D" parent="NavigationRegion3D/Upstairs/DiningRoom/Chair3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.18, 0.21, -0.18)
+use_collision = true
+size = Vector3(0.04, 0.42, 0.04)
+
+[node name="Leg4" type="CSGBox3D" parent="NavigationRegion3D/Upstairs/DiningRoom/Chair3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.18, 0.21, -0.18)
+use_collision = true
+size = Vector3(0.04, 0.42, 0.04)
+
+[node name="Chair4" type="Node3D" parent="NavigationRegion3D/Upstairs/DiningRoom"]
+transform = Transform3D(4.371139e-08, 0, -1, 0, 1, 0, 1, 0, 4.371139e-08, -2, 0, 0)
+
+[node name="Seat" type="CSGBox3D" parent="NavigationRegion3D/Upstairs/DiningRoom/Chair4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0)
+use_collision = true
+size = Vector3(0.45, 0.06, 0.45)
+
+[node name="Back" type="CSGBox3D" parent="NavigationRegion3D/Upstairs/DiningRoom/Chair4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0.2)
+use_collision = true
+size = Vector3(0.45, 0.6, 0.06)
+
+[node name="Leg1" type="CSGBox3D" parent="NavigationRegion3D/Upstairs/DiningRoom/Chair4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.18, 0.21, 0.18)
+use_collision = true
+size = Vector3(0.04, 0.42, 0.04)
+
+[node name="Leg2" type="CSGBox3D" parent="NavigationRegion3D/Upstairs/DiningRoom/Chair4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.18, 0.21, 0.18)
+use_collision = true
+size = Vector3(0.04, 0.42, 0.04)
+
+[node name="Leg3" type="CSGBox3D" parent="NavigationRegion3D/Upstairs/DiningRoom/Chair4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.18, 0.21, -0.18)
+use_collision = true
+size = Vector3(0.04, 0.42, 0.04)
+
+[node name="Leg4" type="CSGBox3D" parent="NavigationRegion3D/Upstairs/DiningRoom/Chair4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.18, 0.21, -0.18)
+use_collision = true
+size = Vector3(0.04, 0.42, 0.04)
+
+[node name="Chandelier" type="Node3D" parent="NavigationRegion3D/Upstairs/DiningRoom"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+
+[node name="Chain" type="CSGCylinder3D" parent="NavigationRegion3D/Upstairs/DiningRoom/Chandelier"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
+radius = 0.02
+height = 0.6
+
+[node name="Body" type="CSGCylinder3D" parent="NavigationRegion3D/Upstairs/DiningRoom/Chandelier"]
+radius = 0.3
+height = 0.15
+
+[node name="ChandelierLight" type="OmniLight3D" parent="NavigationRegion3D/Upstairs/DiningRoom/Chandelier"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0)
+light_color = Color(1, 0.85, 0.6, 1)
+light_energy = 0.4
+omni_range = 8.0
+
+[node name="Kitchen" type="Node3D" parent="NavigationRegion3D/Upstairs"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, 3)
+
+[node name="CounterBack" type="CSGBox3D" parent="NavigationRegion3D/Upstairs/Kitchen"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 6.5)
+use_collision = true
+size = Vector3(8, 0.9, 0.6)
+
+[node name="CounterLeft" type="CSGBox3D" parent="NavigationRegion3D/Upstairs/Kitchen"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5, 0.45, 3)
+use_collision = true
+size = Vector3(0.6, 0.9, 7)
+
+[node name="Oven" type="Node3D" parent="NavigationRegion3D/Upstairs/Kitchen"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5, 0, 0)
+
+[node name="OvenBody" type="CSGBox3D" parent="NavigationRegion3D/Upstairs/Kitchen/Oven"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0)
+use_collision = true
+size = Vector3(0.8, 0.9, 0.7)
+
+[node name="OvenDoor" type="CSGBox3D" parent="NavigationRegion3D/Upstairs/Kitchen/Oven"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.35, -0.36)
+use_collision = true
+size = Vector3(0.7, 0.5, 0.05)
+
+[node name="OvenTop" type="CSGBox3D" parent="NavigationRegion3D/Upstairs/Kitchen/Oven"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.92, 0)
+use_collision = true
+size = Vector3(0.8, 0.04, 0.7)
+
+[node name="Burner1" type="CSGCylinder3D" parent="NavigationRegion3D/Upstairs/Kitchen/Oven"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, 0.95, -0.15)
+use_collision = true
+radius = 0.1
+height = 0.02
+
+[node name="Burner2" type="CSGCylinder3D" parent="NavigationRegion3D/Upstairs/Kitchen/Oven"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 0.95, -0.15)
+use_collision = true
+radius = 0.1
+height = 0.02
+
+[node name="Burner3" type="CSGCylinder3D" parent="NavigationRegion3D/Upstairs/Kitchen/Oven"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, 0.95, 0.15)
+use_collision = true
+radius = 0.08
+height = 0.02
+
+[node name="Burner4" type="CSGCylinder3D" parent="NavigationRegion3D/Upstairs/Kitchen/Oven"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 0.95, 0.15)
+use_collision = true
+radius = 0.08
+height = 0.02
+
+[node name="Sink" type="Node3D" parent="NavigationRegion3D/Upstairs/Kitchen"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6.5)
+
+[node name="SinkBasin" type="CSGBox3D" parent="NavigationRegion3D/Upstairs/Kitchen/Sink"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.85, 0)
+use_collision = true
+size = Vector3(0.8, 0.25, 0.5)
+
+[node name="SinkHole" type="CSGBox3D" parent="NavigationRegion3D/Upstairs/Kitchen/Sink/SinkBasin"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+operation = 2
+size = Vector3(0.6, 0.2, 0.35)
+
+[node name="Faucet" type="CSGCylinder3D" parent="NavigationRegion3D/Upstairs/Kitchen/Sink"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, 0.15)
+use_collision = true
+radius = 0.02
+height = 0.25
+
+[node name="FaucetSpout" type="CSGCylinder3D" parent="NavigationRegion3D/Upstairs/Kitchen/Sink"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 1.2, 0)
+use_collision = true
+radius = 0.02
+height = 0.15
+
+[node name="Fridge" type="Node3D" parent="NavigationRegion3D/Upstairs/Kitchen"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 6.5)
+
+[node name="FridgeBody" type="CSGBox3D" parent="NavigationRegion3D/Upstairs/Kitchen/Fridge"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+use_collision = true
+size = Vector3(0.9, 2, 0.7)
+
+[node name="FridgeHandle" type="CSGBox3D" parent="NavigationRegion3D/Upstairs/Kitchen/Fridge"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.35, 1.2, -0.38)
+use_collision = true
+size = Vector3(0.05, 0.4, 0.05)
+
+[node name="FreezerHandle" type="CSGBox3D" parent="NavigationRegion3D/Upstairs/Kitchen/Fridge"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.35, 1.8, -0.38)
+use_collision = true
+size = Vector3(0.05, 0.2, 0.05)
+
+[node name="KitchenLight" type="OmniLight3D" parent="NavigationRegion3D/Upstairs/Kitchen"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 3, 3)
+light_color = Color(0.9, 0.95, 1, 1)
+light_energy = 0.3
+omni_range = 6.0
+
+[node name="Bathroom" type="Node3D" parent="NavigationRegion3D/Upstairs"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, -7)
+
+[node name="Toilet" type="Node3D" parent="NavigationRegion3D/Upstairs/Bathroom"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 0, 0)
+
+[node name="ToiletBase" type="CSGCylinder3D" parent="NavigationRegion3D/Upstairs/Bathroom/Toilet"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+use_collision = true
+radius = 0.2
+height = 0.4
+
+[node name="ToiletBowl" type="CSGCylinder3D" parent="NavigationRegion3D/Upstairs/Bathroom/Toilet"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, -0.1)
+use_collision = true
+radius = 0.22
+height = 0.1
+
+[node name="ToiletTank" type="CSGBox3D" parent="NavigationRegion3D/Upstairs/Bathroom/Toilet"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.55, 0.18)
+use_collision = true
+size = Vector3(0.4, 0.5, 0.15)
+
+[node name="ToiletSeat" type="CSGCylinder3D" parent="NavigationRegion3D/Upstairs/Bathroom/Toilet"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.52, -0.1)
+use_collision = true
+radius = 0.2
+height = 0.04
+
+[node name="BathroomSink" type="Node3D" parent="NavigationRegion3D/Upstairs/Bathroom"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
+
+[node name="SinkPedestal" type="CSGCylinder3D" parent="NavigationRegion3D/Upstairs/Bathroom/BathroomSink"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
+use_collision = true
+radius = 0.1
+height = 0.8
+
+[node name="SinkBasin" type="CSGCylinder3D" parent="NavigationRegion3D/Upstairs/Bathroom/BathroomSink"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.85, 0)
+use_collision = true
+radius = 0.25
+height = 0.1
+
+[node name="Mirror" type="CSGBox3D" parent="NavigationRegion3D/Upstairs/Bathroom/BathroomSink"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0.48)
+use_collision = true
+size = Vector3(0.5, 0.7, 0.05)
+
+[node name="Bathtub" type="Node3D" parent="NavigationRegion3D/Upstairs/Bathroom"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 0)
+
+[node name="TubOuter" type="CSGBox3D" parent="NavigationRegion3D/Upstairs/Bathroom/Bathtub"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.35, 0)
+use_collision = true
+size = Vector3(0.8, 0.7, 1.8)
+
+[node name="TubInner" type="CSGBox3D" parent="NavigationRegion3D/Upstairs/Bathroom/Bathtub/TubOuter"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+operation = 2
+size = Vector3(0.6, 0.6, 1.6)
+
+[node name="ShowerHead" type="CSGCylinder3D" parent="NavigationRegion3D/Upstairs/Bathroom/Bathtub"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0.8)
+use_collision = true
+radius = 0.08
+height = 0.05
+
+[node name="ShowerPipe" type="CSGCylinder3D" parent="NavigationRegion3D/Upstairs/Bathroom/Bathtub"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0.85)
+use_collision = true
+radius = 0.02
+height = 1.5
+
+[node name="BathroomLight" type="OmniLight3D" parent="NavigationRegion3D/Upstairs/Bathroom"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.8, 0)
+light_color = Color(0.95, 0.95, 1, 1)
+light_energy = 0.25
+
+[node name="Staircase" type="Node3D" parent="NavigationRegion3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, -5)
+
+[node name="Step1" type="CSGBox3D" parent="NavigationRegion3D/Staircase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15, 0)
+use_collision = true
+size = Vector3(2, 0.3, 0.8)
+
+[node name="Step2" type="CSGBox3D" parent="NavigationRegion3D/Staircase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0.8)
+use_collision = true
+size = Vector3(2, 0.3, 0.8)
+
+[node name="Step3" type="CSGBox3D" parent="NavigationRegion3D/Staircase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 1.6)
+use_collision = true
+size = Vector3(2, 0.3, 0.8)
+
+[node name="Step4" type="CSGBox3D" parent="NavigationRegion3D/Staircase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.05, 2.4)
+use_collision = true
+size = Vector3(2, 0.3, 0.8)
+
+[node name="Step5" type="CSGBox3D" parent="NavigationRegion3D/Staircase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.35, 3.2)
+use_collision = true
+size = Vector3(2, 0.3, 0.8)
+
+[node name="Step6" type="CSGBox3D" parent="NavigationRegion3D/Staircase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.65, 4)
+use_collision = true
+size = Vector3(2, 0.3, 0.8)
+
+[node name="Step7" type="CSGBox3D" parent="NavigationRegion3D/Staircase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.95, 4.8)
+use_collision = true
+size = Vector3(2, 0.3, 0.8)
+
+[node name="Step8" type="CSGBox3D" parent="NavigationRegion3D/Staircase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.25, 5.6)
+use_collision = true
+size = Vector3(2, 0.3, 0.8)
+
+[node name="Step9" type="CSGBox3D" parent="NavigationRegion3D/Staircase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.55, 6.4)
+use_collision = true
+size = Vector3(2, 0.3, 0.8)
+
+[node name="Step10" type="CSGBox3D" parent="NavigationRegion3D/Staircase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.85, 7.2)
+use_collision = true
+size = Vector3(2, 0.3, 0.8)
+
+[node name="Step11" type="CSGBox3D" parent="NavigationRegion3D/Staircase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.15, 8)
+use_collision = true
+size = Vector3(2, 0.3, 0.8)
+
+[node name="Step12" type="CSGBox3D" parent="NavigationRegion3D/Staircase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.45, 8.8)
+use_collision = true
+size = Vector3(2, 0.3, 0.8)
+
+[node name="Step13" type="CSGBox3D" parent="NavigationRegion3D/Staircase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.75, 9.6)
+use_collision = true
+size = Vector3(2, 0.3, 0.8)
+
+[node name="Step14" type="CSGBox3D" parent="NavigationRegion3D/Staircase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.05, 10.4)
+use_collision = true
+size = Vector3(2, 0.3, 0.8)
+
+[node name="Step15" type="CSGBox3D" parent="NavigationRegion3D/Staircase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.35, 11.2)
+use_collision = true
+size = Vector3(2, 0.3, 0.8)
+
+[node name="Railing" type="CSGBox3D" parent="NavigationRegion3D/Staircase"]
+transform = Transform3D(0.93969256, 0.34202018, 0, -0.34202018, 0.93969256, 0, 0, 0, 1, -1.1, 2.85, 5.6)
+use_collision = true
+size = Vector3(0.08, 0.9, 12)
+
+[node name="RailingPosts" type="Node3D" parent="NavigationRegion3D/Staircase"]
+
+[node name="Post1" type="CSGBox3D" parent="NavigationRegion3D/Staircase/RailingPosts"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1, 0.6, 0)
+use_collision = true
+size = Vector3(0.08, 0.9, 0.08)
+
+[node name="Post2" type="CSGBox3D" parent="NavigationRegion3D/Staircase/RailingPosts"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1, 4.8, 11.2)
+use_collision = true
+size = Vector3(0.08, 0.9, 0.08)
+
+[node name="Basement" type="Node3D" parent="NavigationRegion3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4, 0)
+
+[node name="BasementFloor" type="CSGBox3D" parent="NavigationRegion3D/Basement"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
+use_collision = true
+size = Vector3(30, 0.5, 20)
+material = SubResource("StandardMaterial3D_floor")
+
+[node name="BasementCeiling" type="Node3D" parent="NavigationRegion3D/Basement"]
+
+[node name="CeilingFront" type="CSGBox3D" parent="NavigationRegion3D/Basement/BasementCeiling"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.75, -6)
+use_collision = true
+size = Vector3(30, 0.5, 8)
+material = SubResource("StandardMaterial3D_ceiling")
+
+[node name="CeilingBack" type="CSGBox3D" parent="NavigationRegion3D/Basement/BasementCeiling"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.75, 8)
+use_collision = true
+size = Vector3(30, 0.5, 4)
+material = SubResource("StandardMaterial3D_ceiling")
+
+[node name="CeilingLeftSide" type="CSGBox3D" parent="NavigationRegion3D/Basement/BasementCeiling"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.5, 3.75, 3)
+use_collision = true
+size = Vector3(13, 0.5, 10)
+material = SubResource("StandardMaterial3D_ceiling")
+
+[node name="CeilingRightSide" type="CSGBox3D" parent="NavigationRegion3D/Basement/BasementCeiling"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.5, 3.75, 3)
+use_collision = true
+size = Vector3(13, 0.5, 10)
+material = SubResource("StandardMaterial3D_ceiling")
+
+[node name="BasementWalls" type="Node3D" parent="NavigationRegion3D/Basement"]
+
+[node name="WallFront" type="CSGBox3D" parent="NavigationRegion3D/Basement/BasementWalls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, -10)
+use_collision = true
+size = Vector3(30, 4, 0.4)
+material = SubResource("StandardMaterial3D_wall")
+
+[node name="WallBack" type="CSGBox3D" parent="NavigationRegion3D/Basement/BasementWalls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, 10)
+use_collision = true
+size = Vector3(30, 4, 0.4)
+material = SubResource("StandardMaterial3D_wall")
+
+[node name="WallLeft" type="CSGBox3D" parent="NavigationRegion3D/Basement/BasementWalls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 1.75, 0)
+use_collision = true
+size = Vector3(0.4, 4, 20)
+material = SubResource("StandardMaterial3D_wall")
+
+[node name="WallRight" type="CSGBox3D" parent="NavigationRegion3D/Basement/BasementWalls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 1.75, 0)
+use_collision = true
+size = Vector3(0.4, 4, 20)
+material = SubResource("StandardMaterial3D_wall")
+
+[node name="BasementStairs" type="Node3D" parent="NavigationRegion3D/Basement"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 5)
+
+[node name="Step1" type="CSGBox3D" parent="NavigationRegion3D/Basement/BasementStairs"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3, 0)
+use_collision = true
+size = Vector3(3, 0.3, 0.8)
+
+[node name="Step2" type="CSGBox3D" parent="NavigationRegion3D/Basement/BasementStairs"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.6, -0.8)
+use_collision = true
+size = Vector3(3, 0.3, 0.8)
+
+[node name="Step3" type="CSGBox3D" parent="NavigationRegion3D/Basement/BasementStairs"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.9, -1.6)
+use_collision = true
+size = Vector3(3, 0.3, 0.8)
+
+[node name="Step4" type="CSGBox3D" parent="NavigationRegion3D/Basement/BasementStairs"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.2, -2.4)
+use_collision = true
+size = Vector3(3, 0.3, 0.8)
+
+[node name="Step5" type="CSGBox3D" parent="NavigationRegion3D/Basement/BasementStairs"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, -3.2)
+use_collision = true
+size = Vector3(3, 0.3, 0.8)
+
+[node name="Step6" type="CSGBox3D" parent="NavigationRegion3D/Basement/BasementStairs"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.8, -4)
+use_collision = true
+size = Vector3(3, 0.3, 0.8)
+
+[node name="Step7" type="CSGBox3D" parent="NavigationRegion3D/Basement/BasementStairs"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.1, -4.8)
+use_collision = true
+size = Vector3(3, 0.3, 0.8)
+
+[node name="Step8" type="CSGBox3D" parent="NavigationRegion3D/Basement/BasementStairs"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.4, -5.6)
+use_collision = true
+size = Vector3(3, 0.3, 0.8)
+
+[node name="Step9" type="CSGBox3D" parent="NavigationRegion3D/Basement/BasementStairs"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.7, -6.4)
+use_collision = true
+size = Vector3(3, 0.3, 0.8)
+
+[node name="Step10" type="CSGBox3D" parent="NavigationRegion3D/Basement/BasementStairs"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3, -7.2)
+use_collision = true
+size = Vector3(3, 0.3, 0.8)
+
+[node name="Step11" type="CSGBox3D" parent="NavigationRegion3D/Basement/BasementStairs"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.3, -8)
+use_collision = true
+size = Vector3(3, 0.3, 0.8)
+
+[node name="Step12" type="CSGBox3D" parent="NavigationRegion3D/Basement/BasementStairs"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.6, -8.8)
+use_collision = true
+size = Vector3(3, 0.3, 0.8)
+
+[node name="Step13" type="CSGBox3D" parent="NavigationRegion3D/Basement/BasementStairs"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.9, -9.6)
+use_collision = true
+size = Vector3(3, 0.3, 0.8)
+
+[node name="BasementProps" type="Node3D" parent="NavigationRegion3D/Basement"]
+
+[node name="WoodPile" type="CSGBox3D" parent="NavigationRegion3D/Basement/BasementProps"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0.4, 8)
+use_collision = true
+size = Vector3(3, 0.8, 1.5)
+
+[node name="OldTable" type="CSGBox3D" parent="NavigationRegion3D/Basement/BasementProps"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0.4, -5)
+use_collision = true
+size = Vector3(2, 0.8, 1)
+
+[node name="Barrel1" type="CSGCylinder3D" parent="NavigationRegion3D/Basement/BasementProps"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0.6, -8)
+use_collision = true
+radius = 0.4
+height = 1.2
+
+[node name="Barrel2" type="CSGCylinder3D" parent="NavigationRegion3D/Basement/BasementProps"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0.6, -7.5)
+use_collision = true
+radius = 0.4
+height = 1.2
+
+[node name="Barrel3" type="CSGCylinder3D" parent="NavigationRegion3D/Basement/BasementProps"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, 0.6, -6.8)
+use_collision = true
+radius = 0.4
+height = 1.2
+
+[node name="Crate1" type="CSGBox3D" parent="NavigationRegion3D/Basement/BasementProps"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0.4, -3)
+use_collision = true
+size = Vector3(1, 0.8, 1)
+
+[node name="Crate2" type="CSGBox3D" parent="NavigationRegion3D/Basement/BasementProps"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.8, 0.4, -2.5)
+use_collision = true
+size = Vector3(0.8, 0.8, 0.8)
+
+[node name="Crate3" type="CSGBox3D" parent="NavigationRegion3D/Basement/BasementProps"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.3, 1.2, -2.7)
+use_collision = true
+size = Vector3(0.7, 0.7, 0.7)
+
+[node name="Furnace" type="Node3D" parent="NavigationRegion3D/Basement/BasementProps"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8)
+
+[node name="FurnaceBody" type="CSGBox3D" parent="NavigationRegion3D/Basement/BasementProps/Furnace"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+use_collision = true
+size = Vector3(2, 1.8, 1.5)
+
+[node name="FurnaceDoor" type="CSGBox3D" parent="NavigationRegion3D/Basement/BasementProps/Furnace"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, -0.76)
+use_collision = true
+size = Vector3(0.6, 0.5, 0.05)
+
+[node name="FurnacePipe" type="CSGCylinder3D" parent="NavigationRegion3D/Basement/BasementProps/Furnace"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 2.5, 0)
+use_collision = true
+radius = 0.2
+height = 1.5
+
+[node name="FurnaceGlow" type="OmniLight3D" parent="NavigationRegion3D/Basement/BasementProps/Furnace"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, -0.5)
+light_color = Color(1, 0.3, 0.1, 1)
+light_energy = 0.15
+omni_range = 3.0
+
+[node name="SupportPillar1" type="CSGBox3D" parent="NavigationRegion3D/Basement/BasementProps"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 1.75, 0)
+use_collision = true
+size = Vector3(0.5, 3.5, 0.5)
+
+[node name="SupportPillar2" type="CSGBox3D" parent="NavigationRegion3D/Basement/BasementProps"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 1.75, 0)
+use_collision = true
+size = Vector3(0.5, 3.5, 0.5)
+
+[node name="SupportPillar3" type="CSGBox3D" parent="NavigationRegion3D/Basement/BasementProps"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 1.75, 5)
+use_collision = true
+size = Vector3(0.5, 3.5, 0.5)
+
+[node name="SupportPillar4" type="CSGBox3D" parent="NavigationRegion3D/Basement/BasementProps"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 1.75, 5)
+use_collision = true
+size = Vector3(0.5, 3.5, 0.5)
+
+[node name="ChainHanging" type="CSGCylinder3D" parent="NavigationRegion3D/Basement/BasementProps"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 2.5, 3)
+radius = 0.03
+
+[node name="BasementLight" type="OmniLight3D" parent="NavigationRegion3D/Basement/BasementProps"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+light_color = Color(0.8, 0.7, 0.5, 1)
+light_energy = 0.15
+omni_range = 12.0
+
 [node name="CrawlingZombie" type="CharacterBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8)
 script = ExtResource("5_be2l0")
@@ -440,3 +1279,239 @@ disabled = true
 path_desired_distance = 0.5
 target_desired_distance = 0.5
 max_speed = 2.0
+
+[node name="CeilingCrawler" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.8, 0)
+script = ExtResource("10_mother")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CeilingCrawler"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_r5cxe")
+
+[node name="MotherModel" parent="CeilingCrawler" instance=ExtResource("11_mother_model")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4, 0)
+
+[node name="EscapeDoor" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -9.8)
+script = ExtResource("12_escape")
+
+[node name="DoorFrame" type="CSGBox3D" parent="EscapeDoor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+use_collision = true
+size = Vector3(2.2, 3, 0.4)
+
+[node name="DoorFrameHole" type="CSGBox3D" parent="EscapeDoor/DoorFrame"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
+operation = 2
+size = Vector3(1.4, 2.6, 0.5)
+
+[node name="DoorSign" type="CSGBox3D" parent="EscapeDoor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.8, 0.3)
+size = Vector3(1.5, 0.3, 0.05)
+
+[node name="InteractionArea" type="Area3D" parent="EscapeDoor"]
+collision_layer = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="EscapeDoor/InteractionArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 1)
+shape = SubResource("BoxShape3D_escape_door")
+
+[node name="DoorPivot" type="Node3D" parent="EscapeDoor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.65, 0, 0)
+
+[node name="DoorMesh" type="CSGBox3D" parent="EscapeDoor/DoorPivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.65, 1.3, 0)
+use_collision = true
+size = Vector3(1.3, 2.5, 0.1)
+material = SubResource("StandardMaterial3D_escape_door")
+
+[node name="Keys" type="Node3D" parent="."]
+
+[node name="Key1" type="Area3D" parent="Keys"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.5, 0.04, -4.8)
+script = ExtResource("13_key")
+key_id = 1
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Keys/Key1"]
+shape = SubResource("BoxShape3D_key")
+
+[node name="KeyMesh" type="CSGBox3D" parent="Keys/Key1"]
+size = Vector3(0.25, 0.12, 0.05)
+material = SubResource("StandardMaterial3D_key")
+
+[node name="Key2" type="Area3D" parent="Keys"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.3, 2.54, -0.1)
+script = ExtResource("13_key")
+key_id = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Keys/Key2"]
+shape = SubResource("BoxShape3D_key")
+
+[node name="KeyMesh" type="CSGBox3D" parent="Keys/Key2"]
+size = Vector3(0.25, 0.12, 0.05)
+material = SubResource("StandardMaterial3D_key")
+
+[node name="Key3" type="Area3D" parent="Keys"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.5, 0.04, 0.1)
+script = ExtResource("13_key")
+key_id = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Keys/Key3"]
+shape = SubResource("BoxShape3D_key")
+
+[node name="KeyMesh" type="CSGBox3D" parent="Keys/Key3"]
+size = Vector3(0.25, 0.12, 0.05)
+material = SubResource("StandardMaterial3D_key")
+
+[node name="Key4" type="Area3D" parent="Keys"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.2, 0.04, 5.2)
+script = ExtResource("13_key")
+key_id = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Keys/Key4"]
+shape = SubResource("BoxShape3D_key")
+
+[node name="KeyMesh" type="CSGBox3D" parent="Keys/Key4"]
+size = Vector3(0.25, 0.12, 0.05)
+material = SubResource("StandardMaterial3D_key")
+
+[node name="Key5" type="Area3D" parent="Keys"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.2, 0.04, -2.8)
+script = ExtResource("13_key")
+key_id = 5
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Keys/Key5"]
+shape = SubResource("BoxShape3D_key")
+
+[node name="KeyMesh" type="CSGBox3D" parent="Keys/Key5"]
+size = Vector3(0.25, 0.12, 0.05)
+material = SubResource("StandardMaterial3D_key")
+
+[node name="Key6" type="Area3D" parent="Keys"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 4.54, 9.3)
+script = ExtResource("13_key")
+key_id = 6
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Keys/Key6"]
+shape = SubResource("BoxShape3D_key")
+
+[node name="KeyMesh" type="CSGBox3D" parent="Keys/Key6"]
+size = Vector3(0.25, 0.12, 0.05)
+material = SubResource("StandardMaterial3D_key")
+
+[node name="Key7" type="Area3D" parent="Keys"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 5.29, 0)
+script = ExtResource("13_key")
+key_id = 7
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Keys/Key7"]
+shape = SubResource("BoxShape3D_key")
+
+[node name="KeyMesh" type="CSGBox3D" parent="Keys/Key7"]
+size = Vector3(0.25, 0.12, 0.05)
+material = SubResource("StandardMaterial3D_key")
+
+[node name="Key8" type="Area3D" parent="Keys"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 4.54, -7)
+script = ExtResource("13_key")
+key_id = 8
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Keys/Key8"]
+shape = SubResource("BoxShape3D_key")
+
+[node name="KeyMesh" type="CSGBox3D" parent="Keys/Key8"]
+size = Vector3(0.25, 0.12, 0.05)
+material = SubResource("StandardMaterial3D_key")
+
+[node name="Key9" type="Area3D" parent="Keys"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.3, 4.54, 6)
+script = ExtResource("13_key")
+key_id = 9
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Keys/Key9"]
+shape = SubResource("BoxShape3D_key")
+
+[node name="KeyMesh" type="CSGBox3D" parent="Keys/Key9"]
+size = Vector3(0.25, 0.12, 0.05)
+material = SubResource("StandardMaterial3D_key")
+
+[node name="Key10" type="Area3D" parent="Keys"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5, 4.54, 9.5)
+script = ExtResource("13_key")
+key_id = 10
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Keys/Key10"]
+shape = SubResource("BoxShape3D_key")
+
+[node name="KeyMesh" type="CSGBox3D" parent="Keys/Key10"]
+size = Vector3(0.25, 0.12, 0.05)
+material = SubResource("StandardMaterial3D_key")
+
+[node name="BasementCrawler" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4, 5)
+script = ExtResource("14_frank")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BasementCrawler"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0.4, 0)
+shape = SubResource("CapsuleShape3D_r5cxe")
+
+[node name="FrankModel" parent="BasementCrawler" instance=ExtResource("15_frank_model")]
+
+[node name="Outside" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -15)
+
+[node name="Ground" type="CSGBox3D" parent="Outside"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, -10)
+use_collision = true
+size = Vector3(40, 0.5, 30)
+
+[node name="Sunlight" type="DirectionalLight3D" parent="Outside"]
+transform = Transform3D(0.866, 0.433, -0.25, 0, 0.5, 0.866, 0.5, -0.75, 0.433, 0, 20, -10)
+light_color = Color(0.9, 0.85, 0.7, 1)
+light_energy = 1.5
+shadow_enabled = true
+
+[node name="Trees" type="Node3D" parent="Outside"]
+
+[node name="Tree1Trunk" type="CSGCylinder3D" parent="Outside/Trees"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 2, -15)
+height = 6.0
+
+[node name="Tree1Leaves" type="CSGSphere3D" parent="Outside/Trees"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 6, -15)
+radius = 3.0
+
+[node name="Tree2Trunk" type="CSGCylinder3D" parent="Outside/Trees"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 2, -18)
+height = 6.0
+
+[node name="Tree2Leaves" type="CSGSphere3D" parent="Outside/Trees"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 6, -18)
+radius = 3.0
+
+[node name="Tree3Trunk" type="CSGCylinder3D" parent="Outside/Trees"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 2, -22)
+height = 6.0
+
+[node name="Tree3Leaves" type="CSGSphere3D" parent="Outside/Trees"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 6, -22)
+radius = 3.0
+
+[node name="Tree4Trunk" type="CSGCylinder3D" parent="Outside/Trees"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 2, -25)
+height = 6.0
+
+[node name="Tree4Leaves" type="CSGSphere3D" parent="Outside/Trees"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 6, -25)
+radius = 3.0
+
+[node name="Path" type="CSGBox3D" parent="Outside"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.01, -8)
+use_collision = true
+size = Vector3(3, 0.1, 20)
+
+[node name="EscapeTrigger" type="Area3D" parent="Outside"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -20)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Outside/EscapeTrigger"]
+shape = SubResource("BoxShape3D_escape_door")
