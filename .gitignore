@@ -3,11 +3,5 @@
 .DS_Store
 addons/
 
-# HTML/Web export builds (too large for GitHub)
-# *.pck
-# *.wasm
-# Horror game.html
-# Horror game.js
-# Horror game.audio.worklet.js
-# Horror game.audio.position.worklet.js
-# export_presets.cfg
+# Local config
+.mcp.json
