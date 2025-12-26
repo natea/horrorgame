@@ -68,3 +68,7 @@ interact={
 "keycode": 69
 }]
 }
+
+[rendering]
+
+textures/vram_compression/import_etc2_astc=true
