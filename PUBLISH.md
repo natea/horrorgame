@@ -55,18 +55,18 @@ Before publishing, export the game for web:
 ### Push the build
 
 ```bash
-~/bin/butler push "/Users/nateaune/Documents/Godot/Horror Game/web_export" nateaune/horror-game:html5
+~/bin/butler push "/Users/nateaune/Documents/Godot/Horror Game/web_export" nateaune/the-crawlers:html5
 ```
 
 ### Check upload status
 
 ```bash
-~/bin/butler status nateaune/horror-game:html5
+~/bin/butler status nateaune/the-crawlers:html5
 ```
 
 ## Game URLs
 
-- **itch.io page:** https://nateaune.itch.io/horror-game
+- **itch.io page:** https://nateaune.itch.io/the-crawlers
 - **GitHub repo:** https://github.com/natea/horrorgame
 
 ## Channel Names
@@ -85,10 +85,10 @@ Before publishing, export the game for web:
 ## Troubleshooting
 
 ### "invalid game" error
-Make sure the game URL matches exactly: `nateaune/horror-game`
+Make sure the game URL matches exactly: `nateaune/the-crawlers`
 
 ### Authentication issues
 Re-run `~/bin/butler login` or check your API key at https://itch.io/user/settings/api-keys
 
 ### Build not processing
-Check status with `~/bin/butler status nateaune/horror-game:html5` - it may take a minute to process.
+Check status with `~/bin/butler status nateaune/the-crawlers:html5` - it may take a minute to process.
