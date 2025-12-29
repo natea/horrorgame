@@ -14,7 +14,7 @@ var t_bob = 0.0
 # Stamina for sprinting
 var stamina = 100.0
 var max_stamina = 100.0
-var stamina_drain = 20.0
+var stamina_drain = 3.33  # Drains over 30 seconds (100 / 30)
 var stamina_regen = 15.0
 var is_exhausted = false
 
@@ -22,6 +22,13 @@ var is_exhausted = false
 @onready var head: Node3D = $Head
 @onready var camera: Camera3D = $Head/Camera3D
 @onready var flashlight: SpotLight3D = $Head/Camera3D/Flashlight
+
+# Footstep sounds
+var footstep_player: AudioStreamPlayer3D = null
+var footstep_timer: float = 0.0
+var footstep_interval: float = 0.5  # Time between footsteps
+var sprint_footstep_interval: float = 0.3  # Faster when sprinting
+var footstep_sound: AudioStream = null
 
 # Flashlight state
 var flashlight_on = true
@@ -44,10 +51,124 @@ var caught_by_monster: String = "george"  # "george" or "mother"
 var collected_keys: Array[int] = []
 const KEYS_NEEDED: int = 10
 
+# Key counter UI
+var key_counter_label: Label = null
+
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	add_to_group("player")
 	base_flashlight_energy = flashlight.light_energy
+	setup_footsteps()
+	setup_crosshair()
+	setup_flashlight_model()
+	setup_key_counter()
+
+func setup_crosshair() -> void:
+	var canvas = CanvasLayer.new()
+	canvas.name = "CrosshairLayer"
+	add_child(canvas)
+
+	# Use a Control as container to center the crosshair
+	var container = CenterContainer.new()
+	container.name = "CrosshairContainer"
+	container.set_anchors_preset(Control.PRESET_FULL_RECT)
+	container.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	canvas.add_child(container)
+
+	var crosshair = ColorRect.new()
+	crosshair.name = "Crosshair"
+	crosshair.color = Color(1, 1, 1, 1)  # Solid white
+	crosshair.custom_minimum_size = Vector2(6, 6)  # Dot size
+	crosshair.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	container.add_child(crosshair)
+
+func setup_key_counter() -> void:
+	var canvas = CanvasLayer.new()
+	canvas.name = "KeyCounterLayer"
+	add_child(canvas)
+
+	key_counter_label = Label.new()
+	key_counter_label.name = "KeyCounter"
+	key_counter_label.text = "Keys: 0/" + str(KEYS_NEEDED)
+	key_counter_label.add_theme_font_size_override("font_size", 24)
+	key_counter_label.add_theme_color_override("font_color", Color(1, 0.85, 0.2))  # Gold color
+	key_counter_label.set_anchors_preset(Control.PRESET_TOP_RIGHT)
+	key_counter_label.position = Vector2(-120, 20)
+	canvas.add_child(key_counter_label)
+
+func update_key_counter() -> void:
+	if key_counter_label:
+		key_counter_label.text = "Keys: " + str(collected_keys.size()) + "/" + str(KEYS_NEEDED)
+
+func setup_flashlight_model() -> void:
+	# Create a flashlight model in the bottom right of the view
+	var flashlight_model = Node3D.new()
+	flashlight_model.name = "FlashlightModel"
+	camera.add_child(flashlight_model)
+
+	# Position in bottom right corner of view
+	flashlight_model.position = Vector3(0.55, -0.3, -0.5)
+	flashlight_model.rotation_degrees = Vector3(0, -30, 20)
+
+	# Create black material
+	var black_mat = StandardMaterial3D.new()
+	black_mat.albedo_color = Color(0.05, 0.05, 0.05)  # Near black
+
+	# Flashlight body (cylinder)
+	var body = CSGCylinder3D.new()
+	body.name = "Body"
+	body.radius = 0.025
+	body.height = 0.2
+	body.rotation_degrees = Vector3(90, 0, 0)  # Point forward
+	body.material = black_mat
+	flashlight_model.add_child(body)
+
+	# Flashlight head (wider cylinder at front)
+	var head = CSGCylinder3D.new()
+	head.name = "Head"
+	head.radius = 0.035
+	head.height = 0.05
+	head.rotation_degrees = Vector3(90, 0, 0)
+	head.position = Vector3(0, 0, -0.12)
+	head.material = black_mat
+	flashlight_model.add_child(head)
+
+	# Lens (front of flashlight - slightly lighter)
+	var lens_mat = StandardMaterial3D.new()
+	lens_mat.albedo_color = Color(0.2, 0.2, 0.2)
+
+	var lens = CSGCylinder3D.new()
+	lens.name = "Lens"
+	lens.radius = 0.03
+	lens.height = 0.01
+	lens.rotation_degrees = Vector3(90, 0, 0)
+	lens.position = Vector3(0, 0, -0.145)
+	lens.material = lens_mat
+	flashlight_model.add_child(lens)
+
+func setup_footsteps() -> void:
+	footstep_player = AudioStreamPlayer3D.new()
+	footstep_player.name = "FootstepPlayer"
+	footstep_player.unit_size = 2.0
+	footstep_player.max_distance = 20.0
+	add_child(footstep_player)
+
+	# Load footstep sound
+	footstep_sound = load("res://audio/footstep_single.wav")
+
+func play_footstep(is_sprinting: bool = false) -> void:
+	if footstep_player.playing:
+		return
+
+	if footstep_sound:
+		footstep_player.stream = footstep_sound
+		footstep_player.volume_db = 3.0  # Louder footsteps
+		# Faster pitch when sprinting, with slight variation
+		if is_sprinting:
+			footstep_player.pitch_scale = randf_range(1.2, 1.4)  # Faster when sprinting
+		else:
+			footstep_player.pitch_scale = randf_range(0.9, 1.1)  # Normal walking
+		footstep_player.play()
 
 func _unhandled_input(event: InputEvent) -> void:
 	if is_dead:
@@ -135,15 +256,23 @@ func _physics_process(delta: float) -> void:
 	else:
 		velocity.x = move_toward(velocity.x, 0, current_speed)
 		velocity.z = move_toward(velocity.z, 0, current_speed)
-	
+
 	# Head bob when walking
 	if is_on_floor() and direction:
 		t_bob += delta * velocity.length() * bob_freq
 		camera.transform.origin.y = sin(t_bob) * bob_amp
+
+		# Play footstep sounds
+		var current_interval = sprint_footstep_interval if is_sprinting else footstep_interval
+		footstep_timer += delta
+		if footstep_timer >= current_interval:
+			footstep_timer = 0.0
+			play_footstep(is_sprinting)
 	else:
 		t_bob = 0.0
 		camera.transform.origin.y = move_toward(camera.transform.origin.y, 0.0, delta * 2.0)
-	
+		footstep_timer = 0.0
+
 	move_and_slide()
 
 func _process(delta: float) -> void:
@@ -188,6 +317,7 @@ func add_battery(amount: float) -> void:
 func add_key(key_id: int) -> void:
 	if key_id not in collected_keys:
 		collected_keys.append(key_id)
+		update_key_counter()
 		print("Key collected! ", collected_keys.size(), "/", KEYS_NEEDED)
 
 func get_key_count() -> int:
@@ -258,36 +388,20 @@ func on_caught_by(monster: String) -> void:
 func play_jumpscare_sound() -> void:
 	jumpscare_sound = AudioStreamPlayer.new()
 	add_child(jumpscare_sound)
-	
-	# Create a harsh noise burst for jumpscare
-	var sample_hz = 22050
-	var duration = 1.5
-	var samples = int(sample_hz * duration)
-	
-	var audio = AudioStreamWAV.new()
-	audio.format = AudioStreamWAV.FORMAT_8_BITS
-	audio.mix_rate = sample_hz
-	audio.stereo = false
-	
-	var data = PackedByteArray()
-	data.resize(samples)
-	
-	for i in samples:
-		var t = float(i) / sample_hz
-		# Combine harsh frequencies for scary effect
-		var noise = randf_range(-1.0, 1.0)
-		var low_freq = sin(t * 100 * TAU) * 0.5
-		var mid_freq = sin(t * 300 * TAU) * 0.3
-		# Envelope - loud start, fade out
-		var envelope = max(0, 1.0 - t / duration)
-		envelope = envelope * envelope
-		var sample = (noise * 0.6 + low_freq + mid_freq) * envelope
-		data[i] = int((sample * 0.5 + 0.5) * 255)
-	
-	audio.data = data
-	jumpscare_sound.stream = audio
-	jumpscare_sound.volume_db = 5.0
-	jumpscare_sound.play()
+
+	# Use cinematic transition sound for jumpscare
+	if ResourceLoader.exists("res://audio/cinematic-transition-boom-high-violin-string-creak-tomas-herudek-1-00-06.mp3"):
+		jumpscare_sound.stream = load("res://audio/cinematic-transition-boom-high-violin-string-creak-tomas-herudek-1-00-06.mp3")
+		jumpscare_sound.volume_db = 5.0
+		jumpscare_sound.play()
+
+	# Also play creature scream
+	var creature_scream = AudioStreamPlayer.new()
+	add_child(creature_scream)
+	if ResourceLoader.exists("res://audio/creature-screaming-tomas-herudek-low-3-00-04.mp3"):
+		creature_scream.stream = load("res://audio/creature-screaming-tomas-herudek-low-3-00-04.mp3")
+		creature_scream.volume_db = 3.0
+		creature_scream.play()
 
 func handle_death(delta: float) -> void:
 	death_timer += delta
@@ -337,6 +451,8 @@ func create_jumpscare_ui() -> void:
 		tex_path = "res://bertha.jpeg"  # Mother's jumpscare
 	elif caught_by_monster == "frank":
 		tex_path = "res://frank jumpscare.jpeg"  # Frank's jumpscare
+	elif caught_by_monster == "jane":
+		tex_path = "res://jumpscare.jpeg"  # Jane's jumpscare (TODO: add jane jumpscare image)
 	var tex = load(tex_path)
 	if tex:
 		face_sprite.texture = tex

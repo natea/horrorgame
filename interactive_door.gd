@@ -9,6 +9,9 @@ var is_open: bool = false
 var target_rotation: float = 0.0
 var player_nearby: bool = false
 
+var door_sound: AudioStreamPlayer3D = null
+var door_creak_sound: AudioStream = null
+
 @onready var interaction_area: Area3D = $InteractionArea
 
 func _ready() -> void:
@@ -17,6 +20,25 @@ func _ready() -> void:
 	# Enable monitoring
 	interaction_area.monitoring = true
 	interaction_area.monitorable = true
+
+	# Setup door sound
+	door_sound = AudioStreamPlayer3D.new()
+	door_sound.name = "DoorSound"
+	door_sound.unit_size = 3.0
+	door_sound.max_distance = 15.0
+	add_child(door_sound)
+
+	# Load door creak sound
+	if ResourceLoader.exists("res://audio/door_creak.wav"):
+		door_creak_sound = load("res://audio/door_creak.wav")
+	elif ResourceLoader.exists("res://audio/door_creak.mp3"):
+		door_creak_sound = load("res://audio/door_creak.mp3")
+
+	if door_creak_sound:
+		print("Door sound loaded: ", door_creak_sound)
+	else:
+		print("Warning: No door creak sound found")
+
 	print("Door ready")
 
 func _process(delta: float) -> void:
@@ -36,6 +58,12 @@ func toggle_door() -> void:
 		target_rotation = open_angle
 	else:
 		target_rotation = 0.0
+
+	# Play door creak sound
+	if door_creak_sound and door_sound:
+		door_sound.stream = door_creak_sound
+		door_sound.pitch_scale = randf_range(0.9, 1.1)  # Slight variation
+		door_sound.play()
 
 func _on_body_entered(body: Node3D) -> void:
 	print("Body entered: ", body.name)

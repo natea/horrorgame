@@ -16,17 +16,27 @@ func _ready() -> void:
 	for child in $RandomCreaks.get_children():
 		if child is AudioStreamPlayer3D:
 			creaks.append(child)
-	
+
+	# Load disturbing landscape as background music (quiet and looping)
+	if ResourceLoader.exists("res://audio/disturbing-landscape-horror-atmosphere-zeroframe-audio-1-01-20.mp3"):
+		background_drone.stream = load("res://audio/disturbing-landscape-horror-atmosphere-zeroframe-audio-1-01-20.mp3")
+		background_drone.volume_db = -18.0  # Quiet background
+		# Loop is handled by the AudioStreamPlayer looping setting
+
 	# Start background sounds if they have streams assigned
 	if background_drone.stream:
 		background_drone.play()
 	if wind_sound.stream:
 		wind_sound.play()
-	
+
 	# Set initial random creak time
 	next_creak_time = randf_range(3.0, 10.0)
 
 func _process(delta: float) -> void:
+	# Loop background drone when it finishes
+	if background_drone.stream and not background_drone.playing:
+		background_drone.play()
+
 	# Random creak timer
 	creak_timer += delta
 	if creak_timer >= next_creak_time:

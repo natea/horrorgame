@@ -53,8 +53,8 @@ func _physics_process(delta: float) -> void:
 	if player.get("is_dead"):
 		return
 
-	# Only chase if player is on second floor (Y > 3)
-	if player.global_position.y < 3.0:
+	# Only chase if player is on second floor (Y > 3 and Y < 8)
+	if player.global_position.y < 3.0 or player.global_position.y > 8.0:
 		return
 
 	# Direct movement toward player

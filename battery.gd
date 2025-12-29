@@ -8,6 +8,8 @@ var player_nearby: bool = false
 var player_ref: Node3D = null
 var is_picked_up: bool = false
 var cooldown_timer: float = 0.0
+var pickup_sound: AudioStreamPlayer3D = null
+var pickup_audio: AudioStream = null
 
 # Static list of spawn positions - safely away from all walls
 # Interior hallway walls: Left at X=-4, Right at X=6, both spanning Z=-2 to Z=10
@@ -72,6 +74,15 @@ func _ready() -> void:
 	collision_layer = 0
 	collision_mask = 1
 
+	# Setup pickup sound
+	pickup_sound = AudioStreamPlayer3D.new()
+	pickup_sound.unit_size = 5.0
+	pickup_sound.max_distance = 20.0
+	add_child(pickup_sound)
+
+	if ResourceLoader.exists("res://audio/pickup.mp3"):
+		pickup_audio = load("res://audio/pickup.mp3")
+
 func _input(event: InputEvent) -> void:
 	if is_picked_up or cooldown_timer > 0:
 		return
@@ -84,7 +95,12 @@ func pickup() -> void:
 		return
 	is_picked_up = true
 	print("Battery picked up!")
-	
+
+	# Play pickup sound
+	if pickup_audio and pickup_sound:
+		pickup_sound.stream = pickup_audio
+		pickup_sound.play()
+
 	# Give battery to player
 	if player_ref and player_ref.has_method("add_battery"):
 		player_ref.add_battery(battery_amount)

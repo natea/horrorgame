@@ -46,20 +46,23 @@ func open_door() -> void:
 	tween.tween_callback(allow_escape)
 
 func allow_escape() -> void:
-	# Create escape trigger zone far outside the mansion
+	# Create escape trigger zone just outside the door
 	var escape_zone = Area3D.new()
 	escape_zone.name = "EscapeZone"
+	escape_zone.collision_layer = 0
+	escape_zone.collision_mask = 1  # Detect player
 
 	var collision = CollisionShape3D.new()
 	var shape = BoxShape3D.new()
-	shape.size = Vector3(10, 5, 5)
+	shape.size = Vector3(10, 5, 10)
 	collision.shape = shape
 
 	escape_zone.add_child(collision)
-	escape_zone.global_position = global_position + Vector3(0, 2, -30)  # Far outside
+	escape_zone.global_position = global_position + Vector3(0, 2, -5)  # Just outside door
 	escape_zone.body_entered.connect(_on_escape_zone_entered)
 
 	get_parent().add_child(escape_zone)
+	print("Escape zone created at ", escape_zone.global_position)
 
 func _on_escape_zone_entered(body: Node3D) -> void:
 	if body.is_in_group("player") and not has_escaped:
@@ -86,26 +89,26 @@ func trigger_escape(player: Node3D) -> void:
 	var tween = create_tween()
 	tween.tween_property(bg, "color:a", 1.0, 2.0)
 
-	# "You Escaped" text
+	# "YOU WON!" text
 	var label = Label.new()
-	label.text = "YOU ESCAPED"
+	label.text = "YOU WON!"
 	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	label.size = viewport_size
-	label.add_theme_font_size_override("font_size", 72)
-	label.add_theme_color_override("font_color", Color(0.8, 1.0, 0.8))
+	label.add_theme_font_size_override("font_size", 96)
+	label.add_theme_color_override("font_color", Color(1.0, 0.85, 0.2))  # Gold color
 	label.modulate.a = 0.0
 	canvas.add_child(label)
 
 	# Subtitle
 	var subtitle = Label.new()
-	subtitle.text = "You collected all 10 keys and escaped the horror..."
+	subtitle.text = "You escaped the Crawlers!"
 	subtitle.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	subtitle.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	subtitle.size = viewport_size
-	subtitle.position.y = 60
-	subtitle.add_theme_font_size_override("font_size", 24)
-	subtitle.add_theme_color_override("font_color", Color(0.7, 0.7, 0.7))
+	subtitle.position.y = 80
+	subtitle.add_theme_font_size_override("font_size", 32)
+	subtitle.add_theme_color_override("font_color", Color(0.9, 0.9, 0.9))
 	subtitle.modulate.a = 0.0
 	canvas.add_child(subtitle)
 
