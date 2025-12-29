@@ -61,8 +61,8 @@ func _physics_process(delta: float) -> void:
 	if player.get("is_dead"):
 		return
 
-	# Only chase if player is in basement (Y < -1)
-	if player.global_position.y > -1.0:
+	# Only chase if player is in basement (Y between -1 and -6, not in dungeon)
+	if player.global_position.y > -1.0 or player.global_position.y < -6.0:
 		return
 
 	# Direct movement toward player

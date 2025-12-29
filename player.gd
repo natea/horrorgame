@@ -33,6 +33,7 @@ var footstep_sound: AudioStream = null
 # Flashlight state
 var flashlight_on = true
 var battery_life: float = 100.0  # 0-100
+var flashlight_click_sound: AudioStreamPlayer = null
 var max_battery: float = 100.0
 var battery_drain_rate: float = 100.0 / 300.0  # Drains over 5 minutes (300 seconds)
 var base_flashlight_energy: float = 2.0
@@ -51,8 +52,23 @@ var caught_by_monster: String = "george"  # "george" or "mother"
 var collected_keys: Array[int] = []
 const KEYS_NEEDED: int = 10
 
+# Lore inventory
+var collected_lore: Array[int] = []
+const LORE_NEEDED: int = 4
+
+# Prisoner rescue tracking
+var prisoner_freed: bool = false
+
+# Ladder climbing
+var is_on_ladder: bool = false
+var ladder_direction: Vector3 = Vector3.FORWARD  # Direction player faces when on ladder
+const CLIMB_SPEED: float = 3.0
+
 # Key counter UI
 var key_counter_label: Label = null
+
+# Lore counter UI
+var lore_counter_label: Label = null
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -96,11 +112,29 @@ func setup_key_counter() -> void:
 	key_counter_label.position = Vector2(-120, 20)
 	canvas.add_child(key_counter_label)
 
+	# Lore counter below key counter
+	lore_counter_label = Label.new()
+	lore_counter_label.name = "LoreCounter"
+	lore_counter_label.text = "Lore: 0/" + str(LORE_NEEDED)
+	lore_counter_label.add_theme_font_size_override("font_size", 20)
+	lore_counter_label.add_theme_color_override("font_color", Color(0.7, 0.8, 0.9))  # Light blue
+	lore_counter_label.set_anchors_preset(Control.PRESET_TOP_RIGHT)
+	lore_counter_label.position = Vector2(-120, 50)
+	canvas.add_child(lore_counter_label)
+
 func update_key_counter() -> void:
 	if key_counter_label:
 		key_counter_label.text = "Keys: " + str(collected_keys.size()) + "/" + str(KEYS_NEEDED)
 
 func setup_flashlight_model() -> void:
+	# Setup flashlight click sound
+	flashlight_click_sound = AudioStreamPlayer.new()
+	flashlight_click_sound.name = "FlashlightClickSound"
+	if ResourceLoader.exists("res://audio/flashlight-click-46073.mp3"):
+		flashlight_click_sound.stream = load("res://audio/flashlight-click-46073.mp3")
+		flashlight_click_sound.volume_db = 15.0
+	add_child(flashlight_click_sound)
+
 	# Create a flashlight model in the bottom right of the view
 	var flashlight_model = Node3D.new()
 	flashlight_model.name = "FlashlightModel"
@@ -185,6 +219,9 @@ func _unhandled_input(event: InputEvent) -> void:
 		if battery_life > 0:
 			flashlight_on = !flashlight_on
 			flashlight.visible = flashlight_on
+			# Play click sound
+			if flashlight_click_sound:
+				flashlight_click_sound.play()
 
 	# Interact with E key - raycast to find what we're looking at
 	if event is InputEventKey and event.pressed and event.keycode == KEY_E:
@@ -217,20 +254,28 @@ func try_interact() -> void:
 		# Check if it's a key
 		if hit.is_in_group("key") and hit.has_method("collect"):
 			hit.collect(self)
+		# Check if it's a lore page
+		elif hit.is_in_group("lore") and hit.has_method("collect"):
+			hit.collect(self)
 
 func _physics_process(delta: float) -> void:
 	if is_dead:
 		handle_death(delta)
 		return
-	
+
+	# Ladder climbing mode
+	if is_on_ladder:
+		handle_ladder_movement(delta)
+		return
+
 	# Gravity
 	if not is_on_floor():
 		velocity += get_gravity() * delta
-	
+
 	# Jumping
 	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
-	
+
 	# Sprinting and stamina
 	var is_sprinting = Input.is_action_pressed("sprint") and not is_exhausted
 	if is_sprinting and velocity.length() > 0.1:
@@ -243,13 +288,13 @@ func _physics_process(delta: float) -> void:
 		if stamina >= max_stamina * 0.3:
 			is_exhausted = false
 		stamina = min(stamina, max_stamina)
-	
+
 	# Movement
 	var input_dir := Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
 	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-	
+
 	var current_speed = SPRINT_SPEED if is_sprinting else SPEED
-	
+
 	if direction:
 		velocity.x = direction.x * current_speed
 		velocity.z = direction.z * current_speed
@@ -313,6 +358,8 @@ func add_battery(amount: float) -> void:
 	if battery_life > 0 and not flashlight.visible:
 		flashlight.visible = true
 		flashlight_on = true
+		if flashlight_click_sound:
+			flashlight_click_sound.play()
 
 func add_key(key_id: int) -> void:
 	if key_id not in collected_keys:
@@ -325,6 +372,32 @@ func get_key_count() -> int:
 
 func has_all_keys() -> bool:
 	return collected_keys.size() >= KEYS_NEEDED
+
+func add_lore(lore_id: int) -> void:
+	if lore_id not in collected_lore:
+		collected_lore.append(lore_id)
+		update_lore_counter()
+		print("Lore collected! ", collected_lore.size(), "/", LORE_NEEDED)
+
+func get_lore_count() -> int:
+	return collected_lore.size()
+
+func has_all_lore() -> bool:
+	return collected_lore.size() >= LORE_NEEDED
+
+func update_lore_counter() -> void:
+	if lore_counter_label:
+		lore_counter_label.text = "Lore: " + str(collected_lore.size()) + "/" + str(LORE_NEEDED)
+
+func can_escape() -> bool:
+	return has_all_keys() and has_all_lore()
+
+func set_prisoner_freed(freed: bool) -> void:
+	prisoner_freed = freed
+	print("Prisoner freed: ", freed)
+
+func has_freed_prisoner() -> bool:
+	return prisoner_freed
 
 func on_caught() -> void:
 	on_caught_by("george")
@@ -452,7 +525,7 @@ func create_jumpscare_ui() -> void:
 	elif caught_by_monster == "frank":
 		tex_path = "res://frank jumpscare.jpeg"  # Frank's jumpscare
 	elif caught_by_monster == "jane":
-		tex_path = "res://jumpscare.jpeg"  # Jane's jumpscare (TODO: add jane jumpscare image)
+		tex_path = "res://jane-jumpscare.jpeg"
 	var tex = load(tex_path)
 	if tex:
 		face_sprite.texture = tex
@@ -500,3 +573,32 @@ func update_jumpscare_overlay(alpha: float) -> void:
 		var overlay = canvas.get_node_or_null("RedOverlay")
 		if overlay:
 			overlay.color.a = alpha * 0.7
+
+# Ladder climbing functions
+func handle_ladder_movement(delta: float) -> void:
+	# No gravity on ladder
+	velocity = Vector3.ZERO
+
+	# Get vertical input (W = up, S = down)
+	var vertical_input = 0.0
+	if Input.is_action_pressed("move_forward"):
+		vertical_input = 1.0
+	elif Input.is_action_pressed("move_backward"):
+		vertical_input = -1.0
+
+	# Move up/down
+	velocity.y = vertical_input * CLIMB_SPEED
+
+	move_and_slide()
+
+func start_climbing(ladder_center: Vector3, face_direction: Vector3) -> void:
+	is_on_ladder = true
+	ladder_direction = face_direction
+	# Snap player to ladder center (X and Z only)
+	global_position.x = ladder_center.x
+	global_position.z = ladder_center.z
+	print("Started climbing ladder at ", ladder_center)
+
+func stop_climbing() -> void:
+	is_on_ladder = false
+	print("Stopped climbing ladder")

@@ -25,12 +25,16 @@ func _input(event: InputEvent) -> void:
 			try_open_door()
 
 func try_open_door() -> void:
-	if player_ref.has_all_keys():
+	if player_ref.has_method("can_escape") and player_ref.can_escape():
 		open_door()
-	else:
+	elif not player_ref.has_all_keys():
 		var keys_have = player_ref.get_key_count()
 		var keys_need = player_ref.KEYS_NEEDED
 		print("Door is locked! You need ", keys_need - keys_have, " more keys. (", keys_have, "/", keys_need, ")")
+	elif not player_ref.has_all_lore():
+		var lore_have = player_ref.get_lore_count()
+		var lore_need = player_ref.LORE_NEEDED
+		print("You must uncover the truth! Find ", lore_need - lore_have, " more lore pages. (", lore_have, "/", lore_need, ")")
 
 func open_door() -> void:
 	is_open = true
@@ -115,6 +119,20 @@ func trigger_escape(player: Node3D) -> void:
 	# Fade in text
 	tween.tween_property(label, "modulate:a", 1.0, 1.0).set_delay(1.0)
 	tween.tween_property(subtitle, "modulate:a", 1.0, 1.0)
+
+	# Check if prisoner was freed - show achievement
+	if player.has_method("has_freed_prisoner") and player.has_freed_prisoner():
+		var achievement = Label.new()
+		achievement.text = "ACHIEVEMENT UNLOCKED: You freed the prisoner!"
+		achievement.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		achievement.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+		achievement.size = viewport_size
+		achievement.position.y = 160
+		achievement.add_theme_font_size_override("font_size", 24)
+		achievement.add_theme_color_override("font_color", Color(0.4, 1.0, 0.4))  # Green
+		achievement.modulate.a = 0.0
+		canvas.add_child(achievement)
+		tween.tween_property(achievement, "modulate:a", 1.0, 1.0).set_delay(0.5)
 
 	# Stop player movement
 	player.is_dead = true  # Reuse death flag to stop movement
